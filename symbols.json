@@ -1,0 +1,1674 @@
+{
+  "symbols": [
+    {
+      "index": "",
+      "name": "no_symbol",
+      "description": "",
+      "value": "",
+      "table": "",
+      "overlayable": "",
+      "destination_address_string": "",
+      "ssid": ""
+    },
+    {
+      "index": "",
+      "name": "none",
+      "description": "",
+      "value": "",
+      "table": "",
+      "overlayable": "",
+      "destination_address_string": "",
+      "ssid": ""
+    },
+    {
+      "index": "1",
+      "name": "police_station",
+      "description": "Police, Sheriff",
+      "value": "!",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "BB",
+      "ssid": ""
+    },
+    {
+      "index": "3",
+      "name": "digi",
+      "description": "Digi (green star with white center)",
+      "value": "#",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "BD",
+      "ssid": ""
+    },
+    {
+      "index": "4",
+      "name": "phone",
+      "description": "Phone",
+      "value": "$",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "BE",
+      "ssid": ""
+    },
+    {
+      "index": "5",
+      "name": "dx_cluster",
+      "description": "DX Cluster",
+      "value": "%",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "BF",
+      "ssid": ""
+    },
+    {
+      "index": "6",
+      "name": "hf_gateway",
+      "description": "HF Gateway",
+      "value": "\u0026",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "BG",
+      "ssid": ""
+    },
+    {
+      "index": "7",
+      "name": "aircraft_small",
+      "description": "Small Aircraft",
+      "value": "\u0027",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "BH",
+      "ssid": "7"
+    },
+    {
+      "index": "8",
+      "name": "mobile_satellite_station",
+      "description": "Mobile Satellite Groundstation",
+      "value": "(",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "BI",
+      "ssid": ""
+    },
+    {
+      "index": "9",
+      "name": "wheelchair",
+      "description": "Wheelchair, Handicapped",
+      "value": ")",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "BJ",
+      "ssid": ""
+    },
+    {
+      "index": "10",
+      "name": "snowmobile",
+      "description": "Snowmobile",
+      "value": "*",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "BK",
+      "ssid": ""
+    },
+    {
+      "index": "11",
+      "name": "red_cross",
+      "description": "Red Cross",
+      "value": "\u002B",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "BL",
+      "ssid": ""
+    },
+    {
+      "index": "12",
+      "name": "boy_scout",
+      "description": "Boy Scouts",
+      "value": ",",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "BM",
+      "ssid": ""
+    },
+    {
+      "index": "13",
+      "name": "home",
+      "description": "House QTH (VHF)",
+      "value": "-",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "BN",
+      "ssid": ""
+    },
+    {
+      "index": "14",
+      "name": "x",
+      "description": "X",
+      "value": ".",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "BO",
+      "ssid": ""
+    },
+    {
+      "index": "15",
+      "name": "red_dot",
+      "description": "Dot",
+      "value": "/",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "BP",
+      "ssid": ""
+    },
+    {
+      "index": "16",
+      "name": "circle_0",
+      "description": "Numbered circle: 0",
+      "value": "0",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "P0",
+      "ssid": ""
+    },
+    {
+      "index": "17",
+      "name": "circle_1",
+      "description": "Numbered circle: 1",
+      "value": "1",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "P1",
+      "ssid": ""
+    },
+    {
+      "index": "18",
+      "name": "circle_2",
+      "description": "Numbered circle: 2",
+      "value": "2",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "P2",
+      "ssid": ""
+    },
+    {
+      "index": "19",
+      "name": "circle_3",
+      "description": "Numbered circle: 3",
+      "value": "3",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "P3",
+      "ssid": ""
+    },
+    {
+      "index": "20",
+      "name": "circle_4",
+      "description": "Numbered circle: 4",
+      "value": "4",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "P4",
+      "ssid": ""
+    },
+    {
+      "index": "21",
+      "name": "circle_5",
+      "description": "Numbered circle: 5",
+      "value": "5",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "P5",
+      "ssid": ""
+    },
+    {
+      "index": "22",
+      "name": "circle_6",
+      "description": "Numbered circle: 6",
+      "value": "6",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "P6",
+      "ssid": ""
+    },
+    {
+      "index": "23",
+      "name": "circle_7",
+      "description": "Numbered circle: 7",
+      "value": "7",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "P7",
+      "ssid": ""
+    },
+    {
+      "index": "24",
+      "name": "circle_8",
+      "description": "Numbered circle: 8",
+      "value": "8",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "P8",
+      "ssid": ""
+    },
+    {
+      "index": "25",
+      "name": "circle_9",
+      "description": "Numbered circle: 9",
+      "value": "9",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "P9",
+      "ssid": ""
+    },
+    {
+      "index": "26",
+      "name": "fire",
+      "description": "Fire",
+      "value": ":",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "MR",
+      "ssid": ""
+    },
+    {
+      "index": "27",
+      "name": "campground_tent",
+      "description": "Campground, Tent",
+      "value": ";",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "MS",
+      "ssid": ""
+    },
+    {
+      "index": "28",
+      "name": "motorcycle",
+      "description": "Motorcycle",
+      "value": "\u003C",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "MT",
+      "ssid": "10"
+    },
+    {
+      "index": "29",
+      "name": "railroad_engine",
+      "description": "Railroad Engine",
+      "value": "=",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "MU",
+      "ssid": ""
+    },
+    {
+      "index": "30",
+      "name": "car",
+      "description": "Car",
+      "value": "\u003E",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "MV",
+      "ssid": "9"
+    },
+    {
+      "index": "31",
+      "name": "file_server",
+      "description": "File Server",
+      "value": "?",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "MW",
+      "ssid": ""
+    },
+    {
+      "index": "32",
+      "name": "hc_future",
+      "description": "Hurricane Future Prediction",
+      "value": "@",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "MX",
+      "ssid": ""
+    },
+    {
+      "index": "33",
+      "name": "aid_station",
+      "description": "Aid Station",
+      "value": "A",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PA",
+      "ssid": ""
+    },
+    {
+      "index": "34",
+      "name": "bbs",
+      "description": "BBS",
+      "value": "B",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PB",
+      "ssid": ""
+    },
+    {
+      "index": "35",
+      "name": "canoe",
+      "description": "Canoe",
+      "value": "C",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PC",
+      "ssid": ""
+    },
+    {
+      "index": "37",
+      "name": "eyeball",
+      "description": "Eyeball (eye catcher)",
+      "value": "E",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PE",
+      "ssid": ""
+    },
+    {
+      "index": "38",
+      "name": "tractor",
+      "description": "Farm vehicle, Tractor",
+      "value": "F",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PF",
+      "ssid": ""
+    },
+    {
+      "index": "39",
+      "name": "grid_square_3x3",
+      "description": "Grid square (6-character)",
+      "value": "G",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PG",
+      "ssid": ""
+    },
+    {
+      "index": "40",
+      "name": "hotel",
+      "description": "Hotel",
+      "value": "H",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PH",
+      "ssid": ""
+    },
+    {
+      "index": "41",
+      "name": "tcp_ip",
+      "description": "TCP/IP Network Station",
+      "value": "I",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PI",
+      "ssid": ""
+    },
+    {
+      "index": "43",
+      "name": "school",
+      "description": "School",
+      "value": "K",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PK",
+      "ssid": ""
+    },
+    {
+      "index": "44",
+      "name": "pc_user",
+      "description": "PC User",
+      "value": "L",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PL",
+      "ssid": ""
+    },
+    {
+      "index": "45",
+      "name": "mac_aprs",
+      "description": "MacAPRS",
+      "value": "M",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PM",
+      "ssid": ""
+    },
+    {
+      "index": "46",
+      "name": "nts_station",
+      "description": "NTS Station",
+      "value": "N",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PN",
+      "ssid": ""
+    },
+    {
+      "index": "47",
+      "name": "balloon",
+      "description": "Balloon",
+      "value": "O",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PO",
+      "ssid": "11"
+    },
+    {
+      "index": "48",
+      "name": "police",
+      "description": "Police Car",
+      "value": "P",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PP",
+      "ssid": ""
+    },
+    {
+      "index": "49",
+      "name": "tbd",
+      "description": "",
+      "value": "Q",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "",
+      "ssid": ""
+    },
+    {
+      "index": "50",
+      "name": "rv",
+      "description": "Recreational Vehicle",
+      "value": "R",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PR",
+      "ssid": "13"
+    },
+    {
+      "index": "51",
+      "name": "shuttle_space",
+      "description": "Space Shuttle",
+      "value": "S",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PS",
+      "ssid": ""
+    },
+    {
+      "index": "52",
+      "name": "sstv",
+      "description": "SSTV",
+      "value": "T",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PT",
+      "ssid": ""
+    },
+    {
+      "index": "53",
+      "name": "bus",
+      "description": "Bus",
+      "value": "U",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PU",
+      "ssid": ""
+    },
+    {
+      "index": "54",
+      "name": "atv",
+      "description": "ATV, Amateur Television",
+      "value": "V",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PV",
+      "ssid": ""
+    },
+    {
+      "index": "55",
+      "name": "national_wx",
+      "description": "National Weather Service Site",
+      "value": "W",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PW",
+      "ssid": ""
+    },
+    {
+      "index": "56",
+      "name": "helicopter",
+      "description": "Helicopter",
+      "value": "X",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PX",
+      "ssid": "6"
+    },
+    {
+      "index": "57",
+      "name": "yacht_sail_boat",
+      "description": "Yacht (sail boat)",
+      "value": "Y",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PY",
+      "ssid": "5"
+    },
+    {
+      "index": "58",
+      "name": "win_aprs",
+      "description": "WinAPRS",
+      "value": "Z",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "PZ",
+      "ssid": ""
+    },
+    {
+      "index": "59",
+      "name": "jogger",
+      "description": "Jogger",
+      "value": "[",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "HS",
+      "ssid": ""
+    },
+    {
+      "index": "60",
+      "name": "triangle",
+      "description": "Triangle (DF)",
+      "value": "\\",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "HT",
+      "ssid": ""
+    },
+    {
+      "index": "61",
+      "name": "pbbs",
+      "description": "Mailbox, Post Office",
+      "value": "]",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "HU",
+      "ssid": ""
+    },
+    {
+      "index": "62",
+      "name": "aircraft_large",
+      "description": "Large Aircraft",
+      "value": "^",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "HV",
+      "ssid": ""
+    },
+    {
+      "index": "63",
+      "name": "wx",
+      "description": "Weather Station",
+      "value": "_",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "HW",
+      "ssid": ""
+    },
+    {
+      "index": "64",
+      "name": "dish_antenna",
+      "description": "Satellite Dish Antenna",
+      "value": "\u0060",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "HX",
+      "ssid": ""
+    },
+    {
+      "index": "65",
+      "name": "ambulance",
+      "description": "Ambulance",
+      "value": "a",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LA",
+      "ssid": "1"
+    },
+    {
+      "index": "66",
+      "name": "bicycle",
+      "description": "Bicycle",
+      "value": "b",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LB",
+      "ssid": "4"
+    },
+    {
+      "index": "67",
+      "name": "icp",
+      "description": "Incident Command Post",
+      "value": "c",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LC",
+      "ssid": ""
+    },
+    {
+      "index": "68",
+      "name": "fire_station",
+      "description": "Fire Station",
+      "value": "d",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LD",
+      "ssid": ""
+    },
+    {
+      "index": "69",
+      "name": "horse",
+      "description": "Horse (equestrian)",
+      "value": "e",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LE",
+      "ssid": ""
+    },
+    {
+      "index": "70",
+      "name": "fire_truck",
+      "description": "Fire Truck",
+      "value": "f",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LF",
+      "ssid": "3"
+    },
+    {
+      "index": "71",
+      "name": "glider",
+      "description": "Glider",
+      "value": "g",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LG",
+      "ssid": ""
+    },
+    {
+      "index": "72",
+      "name": "hospital",
+      "description": "Hospital",
+      "value": "h",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LH",
+      "ssid": ""
+    },
+    {
+      "index": "73",
+      "name": "iota",
+      "description": "Islands On The Air",
+      "value": "i",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LI",
+      "ssid": ""
+    },
+    {
+      "index": "74",
+      "name": "jeep",
+      "description": "Jeep",
+      "value": "j",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LJ",
+      "ssid": "12"
+    },
+    {
+      "index": "75",
+      "name": "truck",
+      "description": "Truck",
+      "value": "k",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LK",
+      "ssid": "14"
+    },
+    {
+      "index": "76",
+      "name": "laptop",
+      "description": "Laptop",
+      "value": "l",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LL",
+      "ssid": ""
+    },
+    {
+      "index": "77",
+      "name": "mic_e_repeater",
+      "description": "Mic-E Repeater",
+      "value": "m",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LM",
+      "ssid": ""
+    },
+    {
+      "index": "78",
+      "name": "node",
+      "description": "Node, Black Bulls-eye",
+      "value": "n",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LN",
+      "ssid": ""
+    },
+    {
+      "index": "79",
+      "name": "eoc",
+      "description": "Emergency Operations Center",
+      "value": "o",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LO",
+      "ssid": ""
+    },
+    {
+      "index": "80",
+      "name": "rover_dog",
+      "description": "Dog",
+      "value": "p",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LP",
+      "ssid": ""
+    },
+    {
+      "index": "81",
+      "name": "grid_square_2x2",
+      "description": "Grid square, 2 by 2",
+      "value": "q",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LQ",
+      "ssid": ""
+    },
+    {
+      "index": "82",
+      "name": "antenna",
+      "description": "Repeater Tower",
+      "value": "r",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LR",
+      "ssid": ""
+    },
+    {
+      "index": "83",
+      "name": "power_boat",
+      "description": "Ship (power boat)",
+      "value": "s",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LS",
+      "ssid": "8"
+    },
+    {
+      "index": "84",
+      "name": "truck_stop",
+      "description": "Truck Stop",
+      "value": "t",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LT",
+      "ssid": ""
+    },
+    {
+      "index": "85",
+      "name": "truck_18_wheeler",
+      "description": "Semi-trailer Truck, 18-wheeler",
+      "value": "u",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LU",
+      "ssid": ""
+    },
+    {
+      "index": "86",
+      "name": "van",
+      "description": "Van",
+      "value": "v",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LV",
+      "ssid": "15"
+    },
+    {
+      "index": "87",
+      "name": "water_station",
+      "description": "Water Station",
+      "value": "w",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LW",
+      "ssid": ""
+    },
+    {
+      "index": "88",
+      "name": "x_aprs",
+      "description": "X / Unix APRS",
+      "value": "x",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LX",
+      "ssid": ""
+    },
+    {
+      "index": "89",
+      "name": "yagi",
+      "description": "House, Yagi Antenna",
+      "value": "y",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LY",
+      "ssid": ""
+    },
+    {
+      "index": "91",
+      "name": "shelter",
+      "description": "Shelter",
+      "value": "z",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "LZ",
+      "ssid": ""
+    },
+    {
+      "index": "92",
+      "name": "tnc_stream_sw1",
+      "description": "",
+      "value": "|",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "",
+      "ssid": ""
+    },
+    {
+      "index": "94",
+      "name": "tnc_stream_sw2",
+      "description": "",
+      "value": "~",
+      "table": "/",
+      "overlayable": "false",
+      "destination_address_string": "",
+      "ssid": ""
+    },
+    {
+      "index": "",
+      "name": "",
+      "description": "",
+      "value": "",
+      "table": "",
+      "overlayable": "",
+      "destination_address_string": "",
+      "ssid": ""
+    },
+    {
+      "index": "1",
+      "name": "emergency",
+      "description": "Emergency",
+      "value": "!",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "OB",
+      "ssid": ""
+    },
+    {
+      "index": "3",
+      "name": "digi_green",
+      "description": "Digipeater (green star)",
+      "value": "#",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "OD",
+      "ssid": ""
+    },
+    {
+      "index": "4",
+      "name": "atm",
+      "description": "Bank or ATM",
+      "value": "$",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "OE",
+      "ssid": ""
+    },
+    {
+      "index": "6",
+      "name": "hf_gateway_diamond",
+      "description": "Gateway Station",
+      "value": "\u0026",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "OG",
+      "ssid": ""
+    },
+    {
+      "index": "7",
+      "name": "crash_site",
+      "description": "Crash Site",
+      "value": "\u0027",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "OH",
+      "ssid": ""
+    },
+    {
+      "index": "8",
+      "name": "cloudy",
+      "description": "Cloudy",
+      "value": "(",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "OI",
+      "ssid": ""
+    },
+    {
+      "index": "9",
+      "name": "firenet_meo_modis",
+      "description": "Firenet MEO, MODIS Earth Observation",
+      "value": ")",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "OJ",
+      "ssid": ""
+    },
+    {
+      "index": "10",
+      "name": "snow",
+      "description": "Snow",
+      "value": "*",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "OK",
+      "ssid": ""
+    },
+    {
+      "index": "11",
+      "name": "church",
+      "description": "Church",
+      "value": "\u002B",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "OL",
+      "ssid": ""
+    },
+    {
+      "index": "12",
+      "name": "girl_scouts",
+      "description": "Girl Scouts",
+      "value": ",",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "OM",
+      "ssid": ""
+    },
+    {
+      "index": "13",
+      "name": "house_hf",
+      "description": "House, HF Antenna",
+      "value": "-",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "ON",
+      "ssid": ""
+    },
+    {
+      "index": "14",
+      "name": "uknown_position",
+      "description": "Ambiguous, Question mark inside circle",
+      "value": ".",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "OO",
+      "ssid": ""
+    },
+    {
+      "index": "16",
+      "name": "circle",
+      "description": "Circle, IRLP / Echolink/WIRES",
+      "value": "0",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "A0",
+      "ssid": ""
+    },
+    {
+      "index": "24",
+      "name": "wifi",
+      "description": "802.11 WiFi or other network node",
+      "value": "8",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "A8",
+      "ssid": ""
+    },
+    {
+      "index": "25",
+      "name": "gas_station_blue",
+      "description": "Gas Station",
+      "value": "9",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "A9",
+      "ssid": ""
+    },
+    {
+      "index": "26",
+      "name": "hail",
+      "description": "Hail",
+      "value": ":",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "NR",
+      "ssid": ""
+    },
+    {
+      "index": "27",
+      "name": "park_picnic",
+      "description": "Park, Picnic area",
+      "value": ";",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "NS",
+      "ssid": ""
+    },
+    {
+      "index": "28",
+      "name": "nws_advisory_gale_flag",
+      "description": "Advisory, Single Red Flag",
+      "value": "\u003C",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "NT",
+      "ssid": ""
+    },
+    {
+      "index": "30",
+      "name": "car2",
+      "description": "Red Car",
+      "value": "\u003E",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "NV",
+      "ssid": ""
+    },
+    {
+      "index": "31",
+      "name": "info_kiosk_blue_box_q",
+      "description": "Info Kiosk",
+      "value": "?",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "NW",
+      "ssid": ""
+    },
+    {
+      "index": "32",
+      "name": "huricane",
+      "description": "Hurricane, Tropical storm",
+      "value": "@",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "NX",
+      "ssid": ""
+    },
+    {
+      "index": "33",
+      "name": "box",
+      "description": "White Box",
+      "value": "A",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AA",
+      "ssid": ""
+    },
+    {
+      "index": "34",
+      "name": "blowing_snow",
+      "description": "Blowing Snow",
+      "value": "B",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AB",
+      "ssid": ""
+    },
+    {
+      "index": "35",
+      "name": "coastguard",
+      "description": "Coast Guard",
+      "value": "C",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AC",
+      "ssid": ""
+    },
+    {
+      "index": "36",
+      "name": "drizzle",
+      "description": "Drizzling Rain",
+      "value": "D",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AD",
+      "ssid": ""
+    },
+    {
+      "index": "37",
+      "name": "smoke",
+      "description": "Smoke, Chimney",
+      "value": "E",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AE",
+      "ssid": ""
+    },
+    {
+      "index": "38",
+      "name": "feezing_rain",
+      "description": "Freezing Rain",
+      "value": "F",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AF",
+      "ssid": ""
+    },
+    {
+      "index": "39",
+      "name": "snow_shower",
+      "description": "Snow Shower",
+      "value": "G",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AG",
+      "ssid": ""
+    },
+    {
+      "index": "40",
+      "name": "haze",
+      "description": "Haze",
+      "value": "H",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AH",
+      "ssid": ""
+    },
+    {
+      "index": "41",
+      "name": "rain_shower",
+      "description": "Rain Shower",
+      "value": "I",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AI",
+      "ssid": ""
+    },
+    {
+      "index": "42",
+      "name": "lightning",
+      "description": "Lightning",
+      "value": "J",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AJ",
+      "ssid": ""
+    },
+    {
+      "index": "43",
+      "name": "kenwood",
+      "description": "Kenwood HT",
+      "value": "K",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AK",
+      "ssid": ""
+    },
+    {
+      "index": "44",
+      "name": "ligthouse",
+      "description": "Lighthouse",
+      "value": "L",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AL",
+      "ssid": ""
+    },
+    {
+      "index": "46",
+      "name": "nav_buoy",
+      "description": "Navigation Buoy",
+      "value": "N",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AN",
+      "ssid": ""
+    },
+    {
+      "index": "47",
+      "name": "rocket",
+      "description": "Rocket",
+      "value": "O",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AO",
+      "ssid": ""
+    },
+    {
+      "index": "48",
+      "name": "parking",
+      "description": "Parking",
+      "value": "P",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AP",
+      "ssid": ""
+    },
+    {
+      "index": "49",
+      "name": "earthquake",
+      "description": "Earthquake",
+      "value": "Q",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AQ",
+      "ssid": ""
+    },
+    {
+      "index": "50",
+      "name": "restaurant",
+      "description": "Restaurant",
+      "value": "R",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AR",
+      "ssid": ""
+    },
+    {
+      "index": "51",
+      "name": "satellite_pac_sat",
+      "description": "Satellite",
+      "value": "S",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AS",
+      "ssid": ""
+    },
+    {
+      "index": "52",
+      "name": "thunderstorm",
+      "description": "Thunderstorm",
+      "value": "T",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AT",
+      "ssid": ""
+    },
+    {
+      "index": "53",
+      "name": "sunny",
+      "description": "Sunny",
+      "value": "U",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AU",
+      "ssid": ""
+    },
+    {
+      "index": "54",
+      "name": "vortac_nav_aid",
+      "description": "VORTAC, Navigational Aid",
+      "value": "V",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AV",
+      "ssid": ""
+    },
+    {
+      "index": "55",
+      "name": "nws_site",
+      "description": "NWS site",
+      "value": "W",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AW",
+      "ssid": ""
+    },
+    {
+      "index": "56",
+      "name": "pharmacy_rx",
+      "description": "Pharmacy",
+      "value": "X",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "AX",
+      "ssid": ""
+    },
+    {
+      "index": "59",
+      "name": "wall_cloud",
+      "description": "Wall Cloud",
+      "value": "[",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "DS",
+      "ssid": ""
+    },
+    {
+      "index": "62",
+      "name": "aircraft",
+      "description": "Aircraft",
+      "value": "^",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "DV",
+      "ssid": ""
+    },
+    {
+      "index": "63",
+      "name": "wx_station_with_digi_green",
+      "description": "Weather Site",
+      "value": "_",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "DW",
+      "ssid": ""
+    },
+    {
+      "index": "64",
+      "name": "rain",
+      "description": "Rain",
+      "value": "\u0060",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "DX",
+      "ssid": ""
+    },
+    {
+      "index": "65",
+      "name": "arrl",
+      "description": "AARL",
+      "value": "a",
+      "table": "A",
+      "overlayable": "false",
+      "destination_address_string": "SA",
+      "ssid": ""
+    },
+    {
+      "index": "65",
+      "name": "races",
+      "description": "RACES",
+      "value": "a",
+      "table": "R",
+      "overlayable": "false",
+      "destination_address_string": "SA",
+      "ssid": ""
+    },
+    {
+      "index": "65",
+      "name": "red_diamond",
+      "description": "Red Diamond",
+      "value": "a",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SA",
+      "ssid": ""
+    },
+    {
+      "index": "66",
+      "name": "blowing_dust",
+      "description": "Blowing Dust, Sand",
+      "value": "b",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SB",
+      "ssid": ""
+    },
+    {
+      "index": "67",
+      "name": "civil_defence_races",
+      "description": "CD Triangle, RACES, CERTS, SATERN",
+      "value": "c",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SC",
+      "ssid": ""
+    },
+    {
+      "index": "68",
+      "name": "dx_spot",
+      "description": "DX Spot",
+      "value": "d",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SD",
+      "ssid": ""
+    },
+    {
+      "index": "69",
+      "name": "sleet",
+      "description": "Sleet",
+      "value": "e",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SE",
+      "ssid": ""
+    },
+    {
+      "index": "70",
+      "name": "funnel_cloud",
+      "description": "Funnel Cloud",
+      "value": "f",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SF",
+      "ssid": ""
+    },
+    {
+      "index": "71",
+      "name": "gale_flags",
+      "description": "Gale (two red flags)",
+      "value": "g",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SG",
+      "ssid": ""
+    },
+    {
+      "index": "72",
+      "name": "ham_store",
+      "description": "Store",
+      "value": "h",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SH",
+      "ssid": ""
+    },
+    {
+      "index": "73",
+      "name": "indoor_short_range_digi",
+      "description": "Black Box, Point Of Interest",
+      "value": "i",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SI",
+      "ssid": ""
+    },
+    {
+      "index": "74",
+      "name": "work_zone",
+      "description": "Work Zone, Excavating Machine",
+      "value": "j",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SJ",
+      "ssid": ""
+    },
+    {
+      "index": "75",
+      "name": "suv_atv",
+      "description": "SUV, ATV",
+      "value": "k",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SK",
+      "ssid": ""
+    },
+    {
+      "index": "76",
+      "name": "area_symbols",
+      "description": "",
+      "value": "l",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "",
+      "ssid": ""
+    },
+    {
+      "index": "77",
+      "name": "value_signpost",
+      "description": "",
+      "value": "m",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "",
+      "ssid": ""
+    },
+    {
+      "index": "78",
+      "name": "triangle_df",
+      "description": "Red Triangle",
+      "value": "n",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SN",
+      "ssid": ""
+    },
+    {
+      "index": "79",
+      "name": "small_circle",
+      "description": "Small Circle",
+      "value": "o",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SO",
+      "ssid": ""
+    },
+    {
+      "index": "80",
+      "name": "partly_cloudy",
+      "description": "Partly Cloudy",
+      "value": "p",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SP",
+      "ssid": ""
+    },
+    {
+      "index": "82",
+      "name": "restrooms",
+      "description": "Restrooms",
+      "value": "r",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SR",
+      "ssid": ""
+    },
+    {
+      "index": "83",
+      "name": "ship_boat_top_view",
+      "description": "Ship, Boat",
+      "value": "s",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SS",
+      "ssid": ""
+    },
+    {
+      "index": "84",
+      "name": "tornado",
+      "description": "Tornado",
+      "value": "t",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "ST",
+      "ssid": ""
+    },
+    {
+      "index": "85",
+      "name": "truck2",
+      "description": "Truck",
+      "value": "u",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SU",
+      "ssid": ""
+    },
+    {
+      "index": "86",
+      "name": "van2",
+      "description": "Van",
+      "value": "v",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SV",
+      "ssid": ""
+    },
+    {
+      "index": "87",
+      "name": "flooding",
+      "description": "Flooding",
+      "value": "w",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SW",
+      "ssid": ""
+    },
+    {
+      "index": "88",
+      "name": "skywarn",
+      "description": "Skywarn",
+      "value": "y",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SY",
+      "ssid": ""
+    },
+    {
+      "index": "89",
+      "name": "shelter",
+      "description": "Shelter",
+      "value": "z",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "SZ",
+      "ssid": ""
+    },
+    {
+      "index": "90",
+      "name": "fog",
+      "description": "Fog",
+      "value": "{",
+      "table": "\\",
+      "overlayable": "true",
+      "destination_address_string": "Q1",
+      "ssid": ""
+    }
+  ]
+}
