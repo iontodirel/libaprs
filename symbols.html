@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JSON to HTML Table</title>
+   <style>
+    /* CSS styles for the table and its elements */
+    table {
+      border-collapse: collapse;
+      width: auto;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <input type="file" id="fileInput">
+  <div id="tableContainer"></div>
+
+  <script>
+    document.getElementById('fileInput').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function() {
+          const jsonData = JSON.parse(reader.result);
+          generateTable(jsonData);
+        };
+        reader.readAsText(file);
+      }
+    });
+
+    function generateTable(json) {
+      let table = '<table>';
+
+      // Generate table headers
+      table += '<thead><tr>';
+      for (let key in json.symbols[0]) {
+        table += `<th>${key}</th>`;
+      }
+      table += '</tr></thead>';
+
+      // Generate table rows
+      table += '<tbody>';
+      json.symbols.forEach(symbol => {
+        table += '<tr>';
+        for (let key in symbol) {
+          table += `<td>${symbol[key]}</td>`;
+        }
+        table += '</tr>';
+      });
+      table += '</tbody>';
+
+      table += '</table>';
+
+      // Display the HTML table in the table container
+      document.getElementById('tableContainer').innerHTML = table;
+    }
+  </script>
+</body>
+</html>
