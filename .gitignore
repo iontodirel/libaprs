@@ -1,0 +1,3 @@
+build/*
+.vscode/*
+tools/symbols/cvs_to_json/external/*

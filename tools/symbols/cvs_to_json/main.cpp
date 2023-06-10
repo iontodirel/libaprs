@@ -9,7 +9,7 @@ int main()
     std::ofstream output_json_stream(OUTPUT_JSON_FILE);
 
     io::CSVReader<8, io::trim_chars<' '>, io::double_quote_escape<',','\"'> > in(INPUT_JSON_FILE);    
-    in.read_header(io::ignore_no_column, "index", "symbol", "value", "table", "overlayable", "destination address string", "ssid", "description");
+    in.read_header(io::ignore_no_column, "index", "name", "value", "table", "overlayable", "destination address string", "ssid", "description");
     
     std::string json;
     json.append("{\n");

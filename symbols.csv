@@ -1,4 +1,4 @@
-index,symbol,value,table,overlayable,destination address string,ssid,description
+index,name,value,table,overlayable,destination address string,ssid,description
 ,no_symbol,,,,,,
 ,none,,,,,,
 1,police_station,!,/,false,BB,,"Police, Sheriff"
