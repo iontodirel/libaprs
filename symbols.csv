@@ -90,7 +90,6 @@ index,symbol,value,table,overlayable,destination address string,ssid,description
 91,shelter,z,/,false,LZ,,Shelter
 92,tnc_stream_sw1,|,/,false,,,
 94,tnc_stream_sw2,~,/,false,,,
-,,,,,,,
 1,emergency,!,\,true,OB,,Emergency
 3,digi_green,#,\,true,OD,,Digipeater (green star)
 4,atm,$,\,true,OE,,Bank or ATM
