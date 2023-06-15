@@ -138,8 +138,8 @@ index,name,value,table,overlayable,destination address string,ssid,description
 62,aircraft,^,\,true,DV,,Aircraft
 63,wx_station_with_digi_green,_,\,true,DW,,Weather Site
 64,rain,`,\,true,DX,,Rain
-65,arrl,a,A,false,SA,,AARL
-65,races,a,R,false,SA,,RACES
+65,arrl,a,A,false,SAA,,AARL
+65,races,a,R,false,SAR,,RACES
 65,red_diamond,a,\,true,SA,,Red Diamond
 66,blowing_dust,b,\,true,SB,,"Blowing Dust, Sand"
 67,civil_defence_races,c,\,true,SC,,"CD Triangle, RACES, CERTS, SATERN"
@@ -163,5 +163,5 @@ index,name,value,table,overlayable,destination address string,ssid,description
 86,van2,v,\,true,SV,,Van
 87,flooding,w,\,true,SW,,Flooding
 88,skywarn,y,\,true,SY,,Skywarn
-89,shelter,z,\,true,SZ,,Shelter
+89,shelter2,z,\,true,SZ,,Shelter
 90,fog,{,\,true,Q1,,Fog

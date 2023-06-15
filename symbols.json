@@ -1397,7 +1397,7 @@
             "value": "a",
             "table": "A",
             "overlayable": "false",
-            "destination_address_string": "SA",
+            "destination_address_string": "SAA",
             "ssid": ""
         },
         {
@@ -1407,7 +1407,7 @@
             "value": "a",
             "table": "R",
             "overlayable": "false",
-            "destination_address_string": "SA",
+            "destination_address_string": "SAR",
             "ssid": ""
         },
         {
@@ -1642,7 +1642,7 @@
         },
         {
             "index": "89",
-            "name": "shelter",
+            "name": "shelter2",
             "description": "Shelter",
             "value": "z",
             "table": "\\",
