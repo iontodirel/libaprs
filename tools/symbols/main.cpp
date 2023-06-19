@@ -460,8 +460,6 @@ int main()
 
     for (size_t i = 0; i < pri_alt_symbols.size(); i++)
     {
-        if (pri_alt_symbols[i].destination_address.empty())
-            continue;
         cpp.append("        symbol_code_map[");
         if (pri_alt_symbols[i].table == '/')
             cpp.append("'" + escape_char(pri_alt_symbols[i].value) + "'");
@@ -471,7 +469,22 @@ int main()
             cpp.append("'" + escape_char(pri_alt_symbols[i].value) + "' + 400");
         else if (pri_alt_symbols[i].table == 'R')
             cpp.append("'" + escape_char(pri_alt_symbols[i].value) + "' + 500");
+        else
+        {
+            break;
+        }
         cpp.append("] = ");
+        cpp.append(std::to_string(i));
+        cpp.append(";");
+        cpp.append("\n");
+    }
+
+    cpp.append("\n");
+
+    for (size_t i = 0; i < pri_alt_symbols.size(); i++)
+    {
+        cpp.append("        symbol_name_map[\"" + pri_alt_symbols[i].name);
+        cpp.append("\"] = ");
         cpp.append(std::to_string(i));
         cpp.append(";");
         cpp.append("\n");
@@ -482,6 +495,7 @@ int main()
     cpp.append("    std::vector<symbol_info> symbols;\n");
     cpp.append("    std::unordered_map<int, int> symbol_code_map;\n");
     cpp.append("    std::unordered_map<std::string, int> destination_address_map;\n");
+    cpp.append("    std::unordered_map<std::string, int> symbol_name_map;\n");
     cpp.append("};\n");
 
     cpp.append("\n");
