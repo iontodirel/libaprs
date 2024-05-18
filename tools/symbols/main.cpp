@@ -21,6 +21,9 @@ struct parse_symbol_info
     std::string destination_address;
     int ssid = -1;
     int unique_value;
+    std::string image;
+    int row;
+    int column;
 };
 
 std::string escape_char(char ch)
@@ -43,15 +46,15 @@ int main()
     // **************************************************************** //
 
     std::string input_csv_file = std::filesystem::canonical(INPUT_CSV_FILE).string();
-    std::string output_json_file = std::filesystem::canonical(INPUT_JSON_FILE).string();
+    std::string output_json_file = OUTPUT_JSON_FILE;
 
     printf("Using CSV input file: %s\n", input_csv_file.c_str());
     printf("Using JSON output file: %s\n", output_json_file.c_str());
 
     std::ofstream output_json_stream(output_json_file);
 
-    io::CSVReader<8, io::trim_chars<' '>, io::double_quote_escape<',','\"'> > in(input_csv_file);    
-    in.read_header(io::ignore_no_column, "index", "name", "value", "table", "overlayable", "destination address string", "ssid", "description");
+    io::CSVReader<11, io::trim_chars<' '>, io::double_quote_escape<',','\"'> > in(input_csv_file);    
+    in.read_header(io::ignore_no_column, "index", "name", "value", "table", "overlayable", "destination address string", "ssid", "description", "image", "row", "column");
     
     std::string json_str;
     json_str.append("{\n");
@@ -65,8 +68,11 @@ int main()
     std::string destination_address_string;
     std::string ssid;
     std::string description;
+    std::string image;
+    std::string row;
+    std::string column;
 
-    while (in.read_row(index, name, value, table, overlayable, destination_address_string, ssid, description))
+    while (in.read_row(index, name, value, table, overlayable, destination_address_string, ssid, description, image, row, column))
     {
         json_str.append("        {\n");
         json_str.append("            \"index\": \"" + index + "\",\n");
@@ -82,7 +88,10 @@ int main()
             json_str.append("            \"table\": \"" + table + "\",\n");
         json_str.append("            \"overlayable\": \"" + overlayable + "\",\n");        
         json_str.append("            \"destination_address_string\": \"" + destination_address_string + "\",\n");
-        json_str.append("            \"ssid\": \"" + ssid + "\"\n");
+        json_str.append("            \"ssid\": \"" + ssid + "\",\n");
+        json_str.append("            \"image\": \"" + image + "\",\n");
+        json_str.append("            \"row\": \"" + row + "\",\n");
+        json_str.append("            \"column\": \"" + column + "\"\n");
         json_str.append("        },\n");
     }
 
@@ -102,8 +111,12 @@ int main()
     //                                                                  //
     // **************************************************************** //
 
-    std::ifstream input_json_file(INPUT_JSON_FILE);
-    std::ofstream output_cpp_stream(OUTPUT_CPP_FILE);
+    std::string output_cpp_file = OUTPUT_CPP_FILE;
+
+    std::ifstream input_json_file(OUTPUT_JSON_FILE);
+    std::ofstream output_cpp_stream(output_cpp_file);
+
+    printf("Using C++ output file: %s\n", output_cpp_file.c_str());
     
     nlohmann::json json_object;
     input_json_file >> json_object;
@@ -120,6 +133,9 @@ int main()
         std::string overlayable = symbol["overlayable"];
         std::string destination_address = symbol["destination_address_string"];
         std::string ssid = symbol["ssid"];
+        std::string image = symbol["image"];
+        std::string row = symbol["row"];
+        std::string column = symbol["column"];
 
         parse_symbol_info s;
 
@@ -150,6 +166,18 @@ int main()
             s.ssid = atoi(ssid.c_str());
         }
 
+        s.image = image;
+        
+        if (!row.empty())
+        {
+            s.row = atoi(row.c_str());
+        }
+
+        if (!column.empty())
+        {
+            s.column = atoi(column.c_str());
+        }
+      
         symbols.push_back(s);
     }
 
@@ -159,7 +187,11 @@ int main()
     //                                                                  //
     // **************************************************************** //
 
-    std::ofstream output_html_stream(OUTPUT_HTML_FILE);
+    std::string output_html_file = OUTPUT_HTML_FILE;
+
+    std::ofstream output_html_stream(output_html_file);
+
+    printf("Using HTML output file: %s\n", output_html_file.c_str());
 
     std::string html;
 
@@ -506,6 +538,41 @@ int main()
     output_cpp_stream << cpp;
 
     output_cpp_stream.close();
+
+    // **************************************************************** //
+    //                                                                  //
+    // JAVASCRIPT GENERATION                                            //
+    //                                                                  //
+    // **************************************************************** //
+
+    std::string output_js_file = OUTPUT_JS_FILE;
+
+    std::ofstream output_js_stream(output_js_file);
+
+    printf("Using JavaScript output file: %s\n", output_js_file.c_str());
+
+    std::string js;
+
+    js.append("const lookupAprsSymbol = (() => {\n");
+    js.append("  const symbolCodeMap = {};\n");
+
+    for (const auto& symbol : pri_alt_symbols)
+    {
+        if (symbol.image.empty())
+            continue;
+        js.append(fmt::format("  symbolCodeMap['{}{}'] = ", escape_char(symbol.table), escape_char(symbol.value)));   
+        js.append(fmt::format("{{ row: {}, column: {}, image: \"{}\" }}\n", symbol.row, symbol.column, symbol.image));   
+    }
+
+    js.append("\n");
+    js.append("  return (symbolTable, symbolCode) => {\n");
+    js.append("  };\n");
+    js.append("\n");
+    js.append("})();\n");
+
+    output_js_stream << js;
+
+    output_js_stream.close();
 
     return 0;
 }

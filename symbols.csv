@@ -1,167 +1,168 @@
-index,name,value,table,overlayable,destination address string,ssid,description
-,no_symbol,,,,,,
-,none,,,,,,
-1,police_station,!,/,false,BB,,"Police, Sheriff"
-3,digi,#,/,false,BD,,Digi (green star with white center)
-4,phone,$,/,false,BE,,Phone
-5,dx_cluster,%,/,false,BF,,DX Cluster
-6,hf_gateway,&,/,false,BG,,HF Gateway
-7,aircraft_small,',/,false,BH,7,Small Aircraft
-8,mobile_satellite_station,(,/,false,BI,,Mobile Satellite Groundstation
-9,wheelchair,),/,false,BJ,,"Wheelchair, Handicapped"
-10,snowmobile,*,/,false,BK,,Snowmobile
-11,red_cross,+,/,false,BL,,Red Cross
-12,boy_scout,",",/,false,BM,,Boy Scouts
-13,home,-,/,false,BN,,House QTH (VHF)
-14,x,.,/,false,BO,,X
-15,red_dot,/,/,false,BP,,Dot
-16,circle_0,0,/,false,P0,,Numbered circle: 0
-17,circle_1,1,/,false,P1,,Numbered circle: 1
-18,circle_2,2,/,false,P2,,Numbered circle: 2
-19,circle_3,3,/,false,P3,,Numbered circle: 3
-20,circle_4,4,/,false,P4,,Numbered circle: 4
-21,circle_5,5,/,false,P5,,Numbered circle: 5
-22,circle_6,6,/,false,P6,,Numbered circle: 6
-23,circle_7,7,/,false,P7,,Numbered circle: 7
-24,circle_8,8,/,false,P8,,Numbered circle: 8
-25,circle_9,9,/,false,P9,,Numbered circle: 9
-26,fire,:,/,false,MR,,Fire
-27,campground_tent,;,/,false,MS,,"Campground, Tent"
-28,motorcycle,<,/,false,MT,10,Motorcycle
-29,railroad_engine,=,/,false,MU,,Railroad Engine
-30,car,>,/,false,MV,9,Car
-31,file_server,?,/,false,MW,,File Server
-32,hc_future,@,/,false,MX,,Hurricane Future Prediction
-33,aid_station,A,/,false,PA,,Aid Station
-34,bbs,B,/,false,PB,,BBS
-35,canoe,C,/,false,PC,,Canoe
-37,eyeball,E,/,false,PE,,Eyeball (eye catcher)
-38,tractor,F,/,false,PF,,"Farm vehicle, Tractor"
-39,grid_square_3x3,G,/,false,PG,,Grid square (6-character)
-40,hotel,H,/,false,PH,,Hotel
-41,tcp_ip,I,/,false,PI,,TCP/IP Network Station
-43,school,K,/,false,PK,,School
-44,pc_user,L,/,false,PL,,PC User
-45,mac_aprs,M,/,false,PM,,MacAPRS
-46,nts_station,N,/,false,PN,,NTS Station
-47,balloon,O,/,false,PO,11,Balloon
-48,police,P,/,false,PP,,Police Car
-49,tbd,Q,/,false,,,
-50,rv,R,/,false,PR,13,Recreational Vehicle
-51,shuttle_space,S,/,false,PS,,Space Shuttle
-52,sstv,T,/,false,PT,,SSTV
-53,bus,U,/,false,PU,,Bus
-54,atv,V,/,false,PV,,"ATV, Amateur Television"
-55,national_wx,W,/,false,PW,,National Weather Service Site
-56,helicopter,X,/,false,PX,6,Helicopter
-57,yacht_sail_boat,Y,/,false,PY,5,Yacht (sail boat)
-58,win_aprs,Z,/,false,PZ,,WinAPRS
-59,jogger,[,/,false,HS,,Jogger
-60,triangle,\,/,false,HT,,Triangle (DF)
-61,pbbs,],/,false,HU,,"Mailbox, Post Office"
-62,aircraft_large,^,/,false,HV,,Large Aircraft
-63,wx,_,/,false,HW,,Weather Station
-64,dish_antenna,`,/,false,HX,,Satellite Dish Antenna
-65,ambulance,a,/,false,LA,1,Ambulance
-66,bicycle,b,/,false,LB,4,Bicycle
-67,icp,c,/,false,LC,,Incident Command Post
-68,fire_station,d,/,false,LD,,Fire Station
-69,horse,e,/,false,LE,,Horse (equestrian)
-70,fire_truck,f,/,false,LF,3,Fire Truck
-71,glider,g,/,false,LG,,Glider
-72,hospital,h,/,false,LH,,Hospital
-73,iota,i,/,false,LI,,Islands On The Air
-74,jeep,j,/,false,LJ,12,Jeep
-75,truck,k,/,false,LK,14,Truck
-76,laptop,l,/,false,LL,,Laptop
-77,mic_e_repeater,m,/,false,LM,,Mic-E Repeater
-78,node,n,/,false,LN,,"Node, Black Bulls-eye"
-79,eoc,o,/,false,LO,,Emergency Operations Center
-80,rover_dog,p,/,false,LP,,Dog
-81,grid_square_2x2,q,/,false,LQ,,"Grid square, 2 by 2"
-82,antenna,r,/,false,LR,,Repeater Tower
-83,power_boat,s,/,false,LS,8,Ship (power boat)
-84,truck_stop,t,/,false,LT,,Truck Stop
-85,truck_18_wheeler,u,/,false,LU,,"Semi-trailer Truck, 18-wheeler"
-86,van,v,/,false,LV,15,Van
-87,water_station,w,/,false,LW,,Water Station
-88,x_aprs,x,/,false,LX,,X / Unix APRS
-89,yagi,y,/,false,LY,,"House, Yagi Antenna"
-91,shelter,z,/,false,LZ,,Shelter
-92,tnc_stream_sw1,|,/,false,,,
-94,tnc_stream_sw2,~,/,false,,,
-1,emergency,!,\,true,OB,,Emergency
-3,digi_green,#,\,true,OD,,Digipeater (green star)
-4,atm,$,\,true,OE,,Bank or ATM
-6,hf_gateway_diamond,&,\,true,OG,,Gateway Station
-7,crash_site,',\,true,OH,,Crash Site
-8,cloudy,(,\,true,OI,,Cloudy
-9,firenet_meo_modis,),\,true,OJ,,"Firenet MEO, MODIS Earth Observation"
-10,snow,*,\,true,OK,,Snow
-11,church,+,\,true,OL,,Church
-12,girl_scouts,",",\,true,OM,,Girl Scouts
-13,house_hf,-,\,true,ON,,"House, HF Antenna"
-14,uknown_position,.,\,true,OO,,"Ambiguous, Question mark inside circle"
-16,circle,0,\,true,A0,,"Circle, IRLP / Echolink/WIRES"
-24,wifi,8,\,true,A8,,802.11 WiFi or other network node
-25,gas_station_blue,9,\,true,A9,,Gas Station
-26,hail,:,\,true,NR,,Hail
-27,park_picnic,;,\,true,NS,,"Park, Picnic area"
-28,nws_advisory_gale_flag,<,\,true,NT,,"Advisory, Single Red Flag"
-30,car2,>,\,true,NV,,Red Car
-31,info_kiosk_blue_box_q,?,\,true,NW,,Info Kiosk
-32,huricane,@,\,true,NX,,"Hurricane, Tropical storm"
-33,box,A,\,true,AA,,White Box
-34,blowing_snow,B,\,true,AB,,Blowing Snow
-35,coastguard,C,\,true,AC,,Coast Guard
-36,drizzle,D,\,true,AD,,Drizzling Rain
-37,smoke,E,\,true,AE,,"Smoke, Chimney"
-38,feezing_rain,F,\,true,AF,,Freezing Rain
-39,snow_shower,G,\,true,AG,,Snow Shower
-40,haze,H,\,true,AH,,Haze
-41,rain_shower,I,\,true,AI,,Rain Shower
-42,lightning,J,\,true,AJ,,Lightning
-43,kenwood,K,\,true,AK,,Kenwood HT
-44,ligthouse,L,\,true,AL,,Lighthouse
-46,nav_buoy,N,\,true,AN,,Navigation Buoy
-47,rocket,O,\,true,AO,,Rocket
-48,parking,P,\,true,AP,,Parking
-49,earthquake,Q,\,true,AQ,,Earthquake
-50,restaurant,R,\,true,AR,,Restaurant
-51,satellite_pac_sat,S,\,true,AS,,Satellite
-52,thunderstorm,T,\,true,AT,,Thunderstorm
-53,sunny,U,\,true,AU,,Sunny
-54,vortac_nav_aid,V,\,true,AV,,"VORTAC, Navigational Aid"
-55,nws_site,W,\,true,AW,,NWS site
-56,pharmacy_rx,X,\,true,AX,,Pharmacy
-59,wall_cloud,[,\,true,DS,,Wall Cloud
-62,aircraft,^,\,true,DV,,Aircraft
-63,wx_station_with_digi_green,_,\,true,DW,,Weather Site
-64,rain,`,\,true,DX,,Rain
-65,arrl,a,A,false,SAA,,AARL
-65,races,a,R,false,SAR,,RACES
-65,red_diamond,a,\,true,SA,,Red Diamond
-66,blowing_dust,b,\,true,SB,,"Blowing Dust, Sand"
-67,civil_defence_races,c,\,true,SC,,"CD Triangle, RACES, CERTS, SATERN"
-68,dx_spot,d,\,true,SD,,DX Spot
-69,sleet,e,\,true,SE,,Sleet
-70,funnel_cloud,f,\,true,SF,,Funnel Cloud
-71,gale_flags,g,\,true,SG,,Gale (two red flags)
-72,ham_store,h,\,true,SH,,Store
-73,indoor_short_range_digi,i,\,true,SI,,"Black Box, Point Of Interest"
-74,work_zone,j,\,true,SJ,,"Work Zone, Excavating Machine"
-75,suv_atv,k,\,true,SK,,"SUV, ATV"
-76,area_symbols,l,\,true,,,
-77,value_signpost,m,\,true,,,
-78,triangle_df,n,\,true,SN,,Red Triangle
-79,small_circle,o,\,true,SO,,Small Circle
-80,partly_cloudy,p,\,true,SP,,Partly Cloudy
-82,restrooms,r,\,true,SR,,Restrooms
-83,ship_boat_top_view,s,\,true,SS,,"Ship, Boat"
-84,tornado,t,\,true,ST,,Tornado
-85,truck2,u,\,true,SU,,Truck
-86,van2,v,\,true,SV,,Van
-87,flooding,w,\,true,SW,,Flooding
-88,skywarn,y,\,true,SY,,Skywarn
-89,shelter2,z,\,true,SZ,,Shelter
-90,fog,{,\,true,Q1,,Fog
+﻿index,name,value,table,overlayable,destination address string,ssid,description,image,row,column
+,no_symbol,,,,,,,,,
+,none,,,,,,,,,
+1,police_station,!,/,false,BB,,"Police, Sheriff",aprs-symbols-24-0.png,1,1
+3,digi,#,/,false,BD,,Digi (green star with white center),aprs-symbols-24-0.png,1,3
+4,phone,$,/,false,BE,,Phone,aprs-symbols-24-0.png,1,4
+5,dx_cluster,%,/,false,BF,,DX Cluster,aprs-symbols-24-0.png,1,5
+6,hf_gateway,&,/,false,BG,,HF Gateway,aprs-symbols-24-0.png,1,6
+7,aircraft_small,',/,false,BH,7,Small Aircraft,aprs-symbols-24-0.png,1,7
+8,mobile_satellite_station,(,/,false,BI,,Mobile Satellite Groundstation,aprs-symbols-24-0.png,1,8
+9,wheelchair,),/,false,BJ,,"Wheelchair, Handicapped",aprs-symbols-24-0.png,1,9
+10,snowmobile,*,/,false,BK,,Snowmobile,aprs-symbols-24-0.png,1,10
+11,red_cross,+,/,false,BL,,Red Cross,aprs-symbols-24-0.png,1,11
+12,boy_scout,",",/,false,BM,,Boy Scouts,aprs-symbols-24-0.png,1,12
+13,home,-,/,false,BN,,House QTH (VHF),aprs-symbols-24-0.png,1,13
+14,x,.,/,false,BO,,X,aprs-symbols-24-0.png,1,14
+15,red_dot,/,/,false,BP,,Dot,aprs-symbols-24-0.png,1,15
+16,circle_0,0,/,false,P0,,Numbered circle: 0,aprs-symbols-24-0.png,1,16
+17,circle_1,1,/,false,P1,,Numbered circle: 1,aprs-symbols-24-0.png,2,1
+18,circle_2,2,/,false,P2,,Numbered circle: 2,aprs-symbols-24-0.png,2,2
+19,circle_3,3,/,false,P3,,Numbered circle: 3,aprs-symbols-24-0.png,2,3
+20,circle_4,4,/,false,P4,,Numbered circle: 4,aprs-symbols-24-0.png,2,4
+21,circle_5,5,/,false,P5,,Numbered circle: 5,aprs-symbols-24-0.png,2,5
+22,circle_6,6,/,false,P6,,Numbered circle: 6,aprs-symbols-24-0.png,2,6
+23,circle_7,7,/,false,P7,,Numbered circle: 7,aprs-symbols-24-0.png,2,7
+24,circle_8,8,/,false,P8,,Numbered circle: 8,aprs-symbols-24-0.png,2,8
+25,circle_9,9,/,false,P9,,Numbered circle: 9,aprs-symbols-24-0.png,2,9
+26,fire,:,/,false,MR,,Fire,aprs-symbols-24-0.png,2,10
+27,campground_tent,;,/,false,MS,,"Campground, Tent",aprs-symbols-24-0.png,2,11
+28,motorcycle,<,/,false,MT,10,Motorcycle,aprs-symbols-24-0.png,2,12
+29,railroad_engine,=,/,false,MU,,Railroad Engine,aprs-symbols-24-0.png,2,13
+30,car,>,/,false,MV,9,Car,aprs-symbols-24-0.png,2,14
+31,file_server,?,/,false,MW,,File Server,aprs-symbols-24-0.png,2,15
+32,hc_future,@,/,false,MX,,Hurricane Future Prediction,aprs-symbols-24-0.png,2,16
+33,aid_station,A,/,false,PA,,Aid Station,aprs-symbols-24-0.png,3,1
+34,bbs,B,/,false,PB,,BBS,aprs-symbols-24-0.png,3,2
+35,canoe,C,/,false,PC,,Canoe,aprs-symbols-24-0.png,3,3
+37,eyeball,E,/,false,PE,,Eyeball (eye catcher),aprs-symbols-24-0.png,3,5
+38,tractor,F,/,false,PF,,"Farm vehicle, Tractor",aprs-symbols-24-0.png,3,6
+39,grid_square_3x3,G,/,false,PG,,Grid square (6-character),aprs-symbols-24-0.png,3,7
+40,hotel,H,/,false,PH,,Hotel,aprs-symbols-24-0.png,3,8
+41,tcp_ip,I,/,false,PI,,TCP/IP Network Station,aprs-symbols-24-0.png,3,9
+43,school,K,/,false,PK,,School,aprs-symbols-24-0.png,3,11
+44,pc_user,L,/,false,PL,,PC User,aprs-symbols-24-0.png,3,12
+45,mac_aprs,M,/,false,PM,,MacAPRS,aprs-symbols-24-0.png,3,13
+46,nts_station,N,/,false,PN,,NTS Station,aprs-symbols-24-0.png,3,14
+47,balloon,O,/,false,PO,11,Balloon,aprs-symbols-24-0.png,3,15
+48,police,P,/,false,PP,,Police Car,aprs-symbols-24-0.png,3,16
+49,tbd,Q,/,false,,,,,,
+50,rv,R,/,false,PR,13,Recreational Vehicle,aprs-symbols-24-0.png,4,2
+51,shuttle_space,S,/,false,PS,,Space Shuttle,aprs-symbols-24-0.png,4,3
+52,sstv,T,/,false,PT,,SSTV,aprs-symbols-24-0.png,4,4
+53,bus,U,/,false,PU,,Bus,aprs-symbols-24-0.png,4,5
+54,atv,V,/,false,PV,,"ATV, Amateur Television",aprs-symbols-24-0.png,4,6
+55,national_wx,W,/,false,PW,,National Weather Service Site,aprs-symbols-24-0.png,4,7
+56,helicopter,X,/,false,PX,6,Helicopter,aprs-symbols-24-0.png,4,8
+57,yacht_sail_boat,Y,/,false,PY,5,Yacht (sail boat),aprs-symbols-24-0.png,4,9
+58,win_aprs,Z,/,false,PZ,,WinAPRS,aprs-symbols-24-0.png,4,10
+59,jogger,[,/,false,HS,,Jogger,aprs-symbols-24-0.png,4,11
+60,triangle,\,/,false,HT,,Triangle (DF),aprs-symbols-24-0.png,4,12
+61,pbbs,],/,false,HU,,"Mailbox, Post Office",aprs-symbols-24-0.png,4,13
+62,aircraft_large,^,/,false,HV,,Large Aircraft,aprs-symbols-24-0.png,4,14
+63,wx,_,/,false,HW,,Weather Station,aprs-symbols-24-0.png,4,15
+64,dish_antenna,`,/,false,HX,,Satellite Dish Antenna,aprs-symbols-24-0.png,4,16
+65,ambulance,a,/,false,LA,1,Ambulance,aprs-symbols-24-0.png,5,1
+66,bicycle,b,/,false,LB,4,Bicycle,aprs-symbols-24-0.png,5,2
+67,icp,c,/,false,LC,,Incident Command Post,aprs-symbols-24-0.png,5,3
+68,fire_station,d,/,false,LD,,Fire Station,aprs-symbols-24-0.png,5,4
+69,horse,e,/,false,LE,,Horse (equestrian),aprs-symbols-24-0.png,5,5
+70,fire_truck,f,/,false,LF,3,Fire Truck,aprs-symbols-24-0.png,5,6
+71,glider,g,/,false,LG,,Glider,aprs-symbols-24-0.png,5,7
+72,hospital,h,/,false,LH,,Hospital,aprs-symbols-24-0.png,5,8
+73,iota,i,/,false,LI,,Islands On The Air,aprs-symbols-24-0.png,5,9
+74,jeep,j,/,false,LJ,12,Jeep,aprs-symbols-24-0.png,5,10
+75,truck,k,/,false,LK,14,Truck,aprs-symbols-24-0.png,5,11
+76,laptop,l,/,false,LL,,Laptop,aprs-symbols-24-0.png,5,12
+77,mic_e_repeater,m,/,false,LM,,Mic-E Repeater,aprs-symbols-24-0.png,5,13
+78,node,n,/,false,LN,,"Node, Black Bulls-eye",aprs-symbols-24-0.png,5,14
+79,eoc,o,/,false,LO,,Emergency Operations Center,aprs-symbols-24-0.png,5,15
+80,rover_dog,p,/,false,LP,,Dog,aprs-symbols-24-0.png,5,16
+81,grid_square_2x2,q,/,false,LQ,,"Grid square, 2 by 2",aprs-symbols-24-0.png,6,1
+82,antenna,r,/,false,LR,,Repeater Tower,aprs-symbols-24-0.png,6,2
+83,power_boat,s,/,false,LS,8,Ship (power boat),aprs-symbols-24-0.png,6,3
+84,truck_stop,t,/,false,LT,,Truck Stop,aprs-symbols-24-0.png,6,4
+85,truck_18_wheeler,u,/,false,LU,,"Semi-trailer Truck, 18-wheeler",aprs-symbols-24-0.png,6,5
+86,van,v,/,false,LV,15,Van,aprs-symbols-24-0.png,6,6
+87,water_station,w,/,false,LW,,Water Station,aprs-symbols-24-0.png,6,7
+88,x_aprs,x,/,false,LX,,X / Unix APRS,aprs-symbols-24-0.png,6,8
+89,yagi,y,/,false,LY,,"House, Yagi Antenna",aprs-symbols-24-0.png,6,9
+91,shelter,z,/,false,LZ,,Shelter,aprs-symbols-24-0.png,6,10
+92,tnc_stream_sw1,|,/,false,,,,aprs-symbols-24-0.png,6,12
+94,tnc_stream_sw2,~,/,false,,,,aprs-symbols-24-0.png,6,14
+1,emergency,!,\,true,OB,,Emergency,,,
+3,digi_green,#,\,true,OD,,Digipeater (green star),aprs-symbols-24-1.png,1,1
+4,atm,$,\,true,OE,,Bank or ATM,aprs-symbols-24-1.png,1,3
+6,hf_gateway_diamond,&,\,true,OG,,Gateway Station,aprs-symbols-24-1.png,1,4
+7,crash_site,',\,true,OH,,Crash Site,aprs-symbols-24-1.png,1,6
+8,cloudy,(,\,true,OI,,Cloudy,aprs-symbols-24-1.png,1,7
+9,firenet_meo_modis,),\,true,OJ,,"Firenet MEO, MODIS Earth Observation",aprs-symbols-24-1.png,1,8
+10,snow,*,\,true,OK,,Snow,aprs-symbols-24-1.png,1,9
+11,church,+,\,true,OL,,Church,aprs-symbols-24-1.png,1,10
+12,girl_scouts,",",\,true,OM,,Girl Scouts,aprs-symbols-24-1.png,1,11
+13,house_hf,-,\,true,ON,,"House, HF Antenna",aprs-symbols-24-1.png,1,12
+14,uknown_position,.,\,true,OO,,"Ambiguous, Question mark inside circle",aprs-symbols-24-1.png,1,13
+16,circle,0,\,true,A0,,"Circle, IRLP / Echolink/WIRES",aprs-symbols-24-1.png,1,14
+24,wifi,8,\,true,A8,,802.11 WiFi or other network node,aprs-symbols-24-1.png,1,16
+25,gas_station_blue,9,\,true,A9,,Gas Station,,,
+26,hail,:,\,true,NR,,Hail,aprs-symbols-24-1.png,2,9
+27,park_picnic,;,\,true,NS,,"Park, Picnic area",,,
+28,nws_advisory_gale_flag,<,\,true,NT,,"Advisory, Single Red Flag",aprs-symbols-24-1.png,2,11
+30,car2,>,\,true,NV,,Red Car,aprs-symbols-24-1.png,2,12
+31,info_kiosk_blue_box_q,?,\,true,NW,,Info Kiosk,aprs-symbols-24-1.png,2,14
+32,huricane,@,\,true,NX,,"Hurricane, Tropical storm",aprs-symbols-24-1.png,2,15
+33,box,A,\,true,AA,,White Box,aprs-symbols-24-1.png,2,16
+34,blowing_snow,B,\,true,AB,,Blowing Snow,aprs-symbols-24-1.png,3,1
+35,coastguard,C,\,true,AC,,Coast Guard,aprs-symbols-24-1.png,3,2
+36,drizzle,D,\,true,AD,,Drizzling Rain,,,
+37,smoke,E,\,true,AE,,"Smoke, Chimney",aprs-symbols-24-1.png,3,4
+38,feezing_rain,F,\,true,AF,,Freezing Rain,aprs-symbols-24-1.png,3,5
+39,snow_shower,G,\,true,AG,,Snow Shower,aprs-symbols-24-1.png,3,6
+40,haze,H,\,true,AH,,Haze,aprs-symbols-24-1.png,3,7
+41,rain_shower,I,\,true,AI,,Rain Shower,aprs-symbols-24-1.png,3,8
+42,lightning,J,\,true,AJ,,Lightning,aprs-symbols-24-1.png,3,9
+43,kenwood,K,\,true,AK,,Kenwood HT,aprs-symbols-24-1.png,3,10
+44,ligthouse,L,\,true,AL,,Lighthouse,aprs-symbols-24-1.png,3,11
+46,nav_buoy,N,\,true,AN,,Navigation Buoy,aprs-symbols-24-1.png,3,12
+47,rocket,O,\,true,AO,,Rocket,aprs-symbols-24-1.png,3,14
+48,parking,P,\,true,AP,,Parking,aprs-symbols-24-1.png,3,15
+49,earthquake,Q,\,true,AQ,,Earthquake,aprs-symbols-24-1.png,3,16
+50,restaurant,R,\,true,AR,,Restaurant,aprs-symbols-24-1.png,4,1
+51,satellite_pac_sat,S,\,true,AS,,Satellite,aprs-symbols-24-1.png,4,2
+52,thunderstorm,T,\,true,AT,,Thunderstorm,aprs-symbols-24-1.png,4,3
+53,sunny,U,\,true,AU,,Sunny,aprs-symbols-24-1.png,4,4
+54,vortac_nav_aid,V,\,true,AV,,"VORTAC, Navigational Aid",aprs-symbols-24-1.png,4,5
+55,nws_site,W,\,true,AW,,NWS site,aprs-symbols-24-1.png,4,6
+56,pharmacy_rx,X,\,true,AX,,Pharmacy,aprs-symbols-24-1.png,4,7
+59,wall_cloud,[,\,true,DS,,Wall Cloud,aprs-symbols-24-1.png,4,8
+62,aircraft,^,\,true,DV,,Aircraft,aprs-symbols-24-1.png,4,11
+63,wx_station_with_digi_green,_,\,true,DW,,Weather Site,aprs-symbols-24-1.png,4,14
+64,rain,`,\,true,DX,,Rain,aprs-symbols-24-1.png,4,15
+65,arrl,a,A,false,SAA,,AARL,aprs-symbols-24-1.png,4,16
+65,races,a,R,false,SAR,,RACES,,,
+65,red_diamond,a,\,true,SA,,Red Diamond,,,
+66,blowing_dust,b,\,true,SB,,"Blowing Dust, Sand",aprs-symbols-24-1.png,5,1
+67,civil_defence_races,c,\,true,SC,,"CD Triangle, RACES, CERTS, SATERN",aprs-symbols-24-1.png,5,2
+68,dx_spot,d,\,true,SD,,DX Spot,aprs-symbols-24-1.png,5,3
+69,sleet,e,\,true,SE,,Sleet,aprs-symbols-24-1.png,5,4
+70,funnel_cloud,f,\,true,SF,,Funnel Cloud,aprs-symbols-24-1.png,5,5
+71,gale_flags,g,\,true,SG,,Gale (two red flags),aprs-symbols-24-1.png,5,6
+72,ham_store,h,\,true,SH,,Store,aprs-symbols-24-1.png,5,7
+73,indoor_short_range_digi,i,\,true,SI,,"Black Box, Point Of Interest",aprs-symbols-24-1.png,5,8
+74,work_zone,j,\,true,SJ,,"Work Zone, Excavating Machine",aprs-symbols-24-1.png,5,9
+75,suv_atv,k,\,true,SK,,"SUV, ATV",aprs-symbols-24-1.png,5,10
+76,area_symbols,l,\,true,,,,aprs-symbols-24-1.png,5,11
+77,value_signpost,m,\,true,,,,,,
+78,triangle_df,n,\,true,SN,,Red Triangle,aprs-symbols-24-1.png,5,13
+79,small_circle,o,\,true,SO,,Small Circle,aprs-symbols-24-1.png,5,14
+80,partly_cloudy,p,\,true,SP,,Partly Cloudy,aprs-symbols-24-1.png,5,15
+82,restrooms,r,\,true,SR,,Restrooms,aprs-symbols-24-1.png,5,16
+83,ship_boat_top_view,s,\,true,SS,,"Ship, Boat",aprs-symbols-24-1.png,6,2
+84,tornado,t,\,true,ST,,Tornado,aprs-symbols-24-1.png,6,3
+85,truck2,u,\,true,SU,,Truck,aprs-symbols-24-1.png,6,4
+86,van2,v,\,true,SV,,Van,aprs-symbols-24-1.png,6,5
+87,flooding,w,\,true,SW,,Flooding,aprs-symbols-24-1.png,6,6
+88,skywarn,y,\,true,SY,,Skywarn,aprs-symbols-24-1.png,6,7
+89,shelter2,z,\,true,SZ,,Shelter,aprs-symbols-24-1.png,6,9
+90,fog,{,\,true,Q1,,Fog,aprs-symbols-24-1.png,6,10
+,,,,,,,,aprs-symbols-24-1.png,6,11

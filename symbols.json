@@ -8,7 +8,10 @@
             "table": "",
             "overlayable": "",
             "destination_address_string": "",
-            "ssid": ""
+            "ssid": "",
+            "image": "",
+            "row": "",
+            "column": ""
         },
         {
             "index": "",
@@ -18,7 +21,10 @@
             "table": "",
             "overlayable": "",
             "destination_address_string": "",
-            "ssid": ""
+            "ssid": "",
+            "image": "",
+            "row": "",
+            "column": ""
         },
         {
             "index": "1",
@@ -28,7 +34,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "BB",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "1",
+            "column": "1"
         },
         {
             "index": "3",
@@ -38,7 +47,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "BD",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "1",
+            "column": "3"
         },
         {
             "index": "4",
@@ -48,7 +60,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "BE",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "1",
+            "column": "4"
         },
         {
             "index": "5",
@@ -58,7 +73,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "BF",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "1",
+            "column": "5"
         },
         {
             "index": "6",
@@ -68,7 +86,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "BG",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "1",
+            "column": "6"
         },
         {
             "index": "7",
@@ -78,7 +99,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "BH",
-            "ssid": "7"
+            "ssid": "7",
+            "image": "aprs-symbols-24-0.png",
+            "row": "1",
+            "column": "7"
         },
         {
             "index": "8",
@@ -88,7 +112,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "BI",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "1",
+            "column": "8"
         },
         {
             "index": "9",
@@ -98,7 +125,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "BJ",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "1",
+            "column": "9"
         },
         {
             "index": "10",
@@ -108,7 +138,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "BK",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "1",
+            "column": "10"
         },
         {
             "index": "11",
@@ -118,7 +151,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "BL",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "1",
+            "column": "11"
         },
         {
             "index": "12",
@@ -128,7 +164,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "BM",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "1",
+            "column": "12"
         },
         {
             "index": "13",
@@ -138,7 +177,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "BN",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "1",
+            "column": "13"
         },
         {
             "index": "14",
@@ -148,7 +190,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "BO",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "1",
+            "column": "14"
         },
         {
             "index": "15",
@@ -158,7 +203,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "BP",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "1",
+            "column": "15"
         },
         {
             "index": "16",
@@ -168,7 +216,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "P0",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "1",
+            "column": "16"
         },
         {
             "index": "17",
@@ -178,7 +229,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "P1",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "2",
+            "column": "1"
         },
         {
             "index": "18",
@@ -188,7 +242,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "P2",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "2",
+            "column": "2"
         },
         {
             "index": "19",
@@ -198,7 +255,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "P3",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "2",
+            "column": "3"
         },
         {
             "index": "20",
@@ -208,7 +268,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "P4",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "2",
+            "column": "4"
         },
         {
             "index": "21",
@@ -218,7 +281,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "P5",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "2",
+            "column": "5"
         },
         {
             "index": "22",
@@ -228,7 +294,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "P6",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "2",
+            "column": "6"
         },
         {
             "index": "23",
@@ -238,7 +307,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "P7",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "2",
+            "column": "7"
         },
         {
             "index": "24",
@@ -248,7 +320,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "P8",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "2",
+            "column": "8"
         },
         {
             "index": "25",
@@ -258,7 +333,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "P9",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "2",
+            "column": "9"
         },
         {
             "index": "26",
@@ -268,7 +346,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "MR",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "2",
+            "column": "10"
         },
         {
             "index": "27",
@@ -278,7 +359,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "MS",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "2",
+            "column": "11"
         },
         {
             "index": "28",
@@ -288,7 +372,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "MT",
-            "ssid": "10"
+            "ssid": "10",
+            "image": "aprs-symbols-24-0.png",
+            "row": "2",
+            "column": "12"
         },
         {
             "index": "29",
@@ -298,7 +385,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "MU",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "2",
+            "column": "13"
         },
         {
             "index": "30",
@@ -308,7 +398,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "MV",
-            "ssid": "9"
+            "ssid": "9",
+            "image": "aprs-symbols-24-0.png",
+            "row": "2",
+            "column": "14"
         },
         {
             "index": "31",
@@ -318,7 +411,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "MW",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "2",
+            "column": "15"
         },
         {
             "index": "32",
@@ -328,7 +424,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "MX",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "2",
+            "column": "16"
         },
         {
             "index": "33",
@@ -338,7 +437,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PA",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "3",
+            "column": "1"
         },
         {
             "index": "34",
@@ -348,7 +450,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PB",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "3",
+            "column": "2"
         },
         {
             "index": "35",
@@ -358,7 +463,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PC",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "3",
+            "column": "3"
         },
         {
             "index": "37",
@@ -368,7 +476,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PE",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "3",
+            "column": "5"
         },
         {
             "index": "38",
@@ -378,7 +489,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PF",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "3",
+            "column": "6"
         },
         {
             "index": "39",
@@ -388,7 +502,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PG",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "3",
+            "column": "7"
         },
         {
             "index": "40",
@@ -398,7 +515,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PH",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "3",
+            "column": "8"
         },
         {
             "index": "41",
@@ -408,7 +528,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PI",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "3",
+            "column": "9"
         },
         {
             "index": "43",
@@ -418,7 +541,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PK",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "3",
+            "column": "11"
         },
         {
             "index": "44",
@@ -428,7 +554,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PL",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "3",
+            "column": "12"
         },
         {
             "index": "45",
@@ -438,7 +567,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PM",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "3",
+            "column": "13"
         },
         {
             "index": "46",
@@ -448,7 +580,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PN",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "3",
+            "column": "14"
         },
         {
             "index": "47",
@@ -458,7 +593,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PO",
-            "ssid": "11"
+            "ssid": "11",
+            "image": "aprs-symbols-24-0.png",
+            "row": "3",
+            "column": "15"
         },
         {
             "index": "48",
@@ -468,7 +606,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PP",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "3",
+            "column": "16"
         },
         {
             "index": "49",
@@ -478,7 +619,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "",
-            "ssid": ""
+            "ssid": "",
+            "image": "",
+            "row": "",
+            "column": ""
         },
         {
             "index": "50",
@@ -488,7 +632,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PR",
-            "ssid": "13"
+            "ssid": "13",
+            "image": "aprs-symbols-24-0.png",
+            "row": "4",
+            "column": "2"
         },
         {
             "index": "51",
@@ -498,7 +645,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PS",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "4",
+            "column": "3"
         },
         {
             "index": "52",
@@ -508,7 +658,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PT",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "4",
+            "column": "4"
         },
         {
             "index": "53",
@@ -518,7 +671,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PU",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "4",
+            "column": "5"
         },
         {
             "index": "54",
@@ -528,7 +684,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PV",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "4",
+            "column": "6"
         },
         {
             "index": "55",
@@ -538,7 +697,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PW",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "4",
+            "column": "7"
         },
         {
             "index": "56",
@@ -548,7 +710,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PX",
-            "ssid": "6"
+            "ssid": "6",
+            "image": "aprs-symbols-24-0.png",
+            "row": "4",
+            "column": "8"
         },
         {
             "index": "57",
@@ -558,7 +723,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PY",
-            "ssid": "5"
+            "ssid": "5",
+            "image": "aprs-symbols-24-0.png",
+            "row": "4",
+            "column": "9"
         },
         {
             "index": "58",
@@ -568,7 +736,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "PZ",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "4",
+            "column": "10"
         },
         {
             "index": "59",
@@ -578,7 +749,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "HS",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "4",
+            "column": "11"
         },
         {
             "index": "60",
@@ -588,7 +762,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "HT",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "4",
+            "column": "12"
         },
         {
             "index": "61",
@@ -598,7 +775,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "HU",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "4",
+            "column": "13"
         },
         {
             "index": "62",
@@ -608,7 +788,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "HV",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "4",
+            "column": "14"
         },
         {
             "index": "63",
@@ -618,7 +801,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "HW",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "4",
+            "column": "15"
         },
         {
             "index": "64",
@@ -628,7 +814,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "HX",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "4",
+            "column": "16"
         },
         {
             "index": "65",
@@ -638,7 +827,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LA",
-            "ssid": "1"
+            "ssid": "1",
+            "image": "aprs-symbols-24-0.png",
+            "row": "5",
+            "column": "1"
         },
         {
             "index": "66",
@@ -648,7 +840,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LB",
-            "ssid": "4"
+            "ssid": "4",
+            "image": "aprs-symbols-24-0.png",
+            "row": "5",
+            "column": "2"
         },
         {
             "index": "67",
@@ -658,7 +853,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LC",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "5",
+            "column": "3"
         },
         {
             "index": "68",
@@ -668,7 +866,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LD",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "5",
+            "column": "4"
         },
         {
             "index": "69",
@@ -678,7 +879,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LE",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "5",
+            "column": "5"
         },
         {
             "index": "70",
@@ -688,7 +892,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LF",
-            "ssid": "3"
+            "ssid": "3",
+            "image": "aprs-symbols-24-0.png",
+            "row": "5",
+            "column": "6"
         },
         {
             "index": "71",
@@ -698,7 +905,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LG",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "5",
+            "column": "7"
         },
         {
             "index": "72",
@@ -708,7 +918,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LH",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "5",
+            "column": "8"
         },
         {
             "index": "73",
@@ -718,7 +931,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LI",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "5",
+            "column": "9"
         },
         {
             "index": "74",
@@ -728,7 +944,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LJ",
-            "ssid": "12"
+            "ssid": "12",
+            "image": "aprs-symbols-24-0.png",
+            "row": "5",
+            "column": "10"
         },
         {
             "index": "75",
@@ -738,7 +957,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LK",
-            "ssid": "14"
+            "ssid": "14",
+            "image": "aprs-symbols-24-0.png",
+            "row": "5",
+            "column": "11"
         },
         {
             "index": "76",
@@ -748,7 +970,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LL",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "5",
+            "column": "12"
         },
         {
             "index": "77",
@@ -758,7 +983,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LM",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "5",
+            "column": "13"
         },
         {
             "index": "78",
@@ -768,7 +996,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LN",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "5",
+            "column": "14"
         },
         {
             "index": "79",
@@ -778,7 +1009,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LO",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "5",
+            "column": "15"
         },
         {
             "index": "80",
@@ -788,7 +1022,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LP",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "5",
+            "column": "16"
         },
         {
             "index": "81",
@@ -798,7 +1035,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LQ",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "6",
+            "column": "1"
         },
         {
             "index": "82",
@@ -808,7 +1048,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LR",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "6",
+            "column": "2"
         },
         {
             "index": "83",
@@ -818,7 +1061,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LS",
-            "ssid": "8"
+            "ssid": "8",
+            "image": "aprs-symbols-24-0.png",
+            "row": "6",
+            "column": "3"
         },
         {
             "index": "84",
@@ -828,7 +1074,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LT",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "6",
+            "column": "4"
         },
         {
             "index": "85",
@@ -838,7 +1087,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LU",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "6",
+            "column": "5"
         },
         {
             "index": "86",
@@ -848,7 +1100,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LV",
-            "ssid": "15"
+            "ssid": "15",
+            "image": "aprs-symbols-24-0.png",
+            "row": "6",
+            "column": "6"
         },
         {
             "index": "87",
@@ -858,7 +1113,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LW",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "6",
+            "column": "7"
         },
         {
             "index": "88",
@@ -868,7 +1126,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LX",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "6",
+            "column": "8"
         },
         {
             "index": "89",
@@ -878,7 +1139,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LY",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "6",
+            "column": "9"
         },
         {
             "index": "91",
@@ -888,7 +1152,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "LZ",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "6",
+            "column": "10"
         },
         {
             "index": "92",
@@ -898,7 +1165,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "6",
+            "column": "12"
         },
         {
             "index": "94",
@@ -908,7 +1178,10 @@
             "table": "/",
             "overlayable": "false",
             "destination_address_string": "",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-0.png",
+            "row": "6",
+            "column": "14"
         },
         {
             "index": "1",
@@ -918,7 +1191,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "OB",
-            "ssid": ""
+            "ssid": "",
+            "image": "",
+            "row": "",
+            "column": ""
         },
         {
             "index": "3",
@@ -928,7 +1204,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "OD",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "1",
+            "column": "1"
         },
         {
             "index": "4",
@@ -938,7 +1217,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "OE",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "1",
+            "column": "3"
         },
         {
             "index": "6",
@@ -948,7 +1230,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "OG",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "1",
+            "column": "4"
         },
         {
             "index": "7",
@@ -958,7 +1243,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "OH",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "1",
+            "column": "6"
         },
         {
             "index": "8",
@@ -968,7 +1256,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "OI",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "1",
+            "column": "7"
         },
         {
             "index": "9",
@@ -978,7 +1269,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "OJ",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "1",
+            "column": "8"
         },
         {
             "index": "10",
@@ -988,7 +1282,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "OK",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "1",
+            "column": "9"
         },
         {
             "index": "11",
@@ -998,7 +1295,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "OL",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "1",
+            "column": "10"
         },
         {
             "index": "12",
@@ -1008,7 +1308,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "OM",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "1",
+            "column": "11"
         },
         {
             "index": "13",
@@ -1018,7 +1321,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "ON",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "1",
+            "column": "12"
         },
         {
             "index": "14",
@@ -1028,7 +1334,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "OO",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "1",
+            "column": "13"
         },
         {
             "index": "16",
@@ -1038,7 +1347,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "A0",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "1",
+            "column": "14"
         },
         {
             "index": "24",
@@ -1048,7 +1360,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "A8",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "1",
+            "column": "16"
         },
         {
             "index": "25",
@@ -1058,7 +1373,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "A9",
-            "ssid": ""
+            "ssid": "",
+            "image": "",
+            "row": "",
+            "column": ""
         },
         {
             "index": "26",
@@ -1068,7 +1386,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "NR",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "2",
+            "column": "9"
         },
         {
             "index": "27",
@@ -1078,7 +1399,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "NS",
-            "ssid": ""
+            "ssid": "",
+            "image": "",
+            "row": "",
+            "column": ""
         },
         {
             "index": "28",
@@ -1088,7 +1412,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "NT",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "2",
+            "column": "11"
         },
         {
             "index": "30",
@@ -1098,7 +1425,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "NV",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "2",
+            "column": "12"
         },
         {
             "index": "31",
@@ -1108,7 +1438,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "NW",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "2",
+            "column": "14"
         },
         {
             "index": "32",
@@ -1118,7 +1451,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "NX",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "2",
+            "column": "15"
         },
         {
             "index": "33",
@@ -1128,7 +1464,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AA",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "2",
+            "column": "16"
         },
         {
             "index": "34",
@@ -1138,7 +1477,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AB",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "3",
+            "column": "1"
         },
         {
             "index": "35",
@@ -1148,7 +1490,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AC",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "3",
+            "column": "2"
         },
         {
             "index": "36",
@@ -1158,7 +1503,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AD",
-            "ssid": ""
+            "ssid": "",
+            "image": "",
+            "row": "",
+            "column": ""
         },
         {
             "index": "37",
@@ -1168,7 +1516,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AE",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "3",
+            "column": "4"
         },
         {
             "index": "38",
@@ -1178,7 +1529,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AF",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "3",
+            "column": "5"
         },
         {
             "index": "39",
@@ -1188,7 +1542,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AG",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "3",
+            "column": "6"
         },
         {
             "index": "40",
@@ -1198,7 +1555,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AH",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "3",
+            "column": "7"
         },
         {
             "index": "41",
@@ -1208,7 +1568,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AI",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "3",
+            "column": "8"
         },
         {
             "index": "42",
@@ -1218,7 +1581,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AJ",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "3",
+            "column": "9"
         },
         {
             "index": "43",
@@ -1228,7 +1594,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AK",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "3",
+            "column": "10"
         },
         {
             "index": "44",
@@ -1238,7 +1607,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AL",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "3",
+            "column": "11"
         },
         {
             "index": "46",
@@ -1248,7 +1620,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AN",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "3",
+            "column": "12"
         },
         {
             "index": "47",
@@ -1258,7 +1633,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AO",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "3",
+            "column": "14"
         },
         {
             "index": "48",
@@ -1268,7 +1646,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AP",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "3",
+            "column": "15"
         },
         {
             "index": "49",
@@ -1278,7 +1659,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AQ",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "3",
+            "column": "16"
         },
         {
             "index": "50",
@@ -1288,7 +1672,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AR",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "4",
+            "column": "1"
         },
         {
             "index": "51",
@@ -1298,7 +1685,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AS",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "4",
+            "column": "2"
         },
         {
             "index": "52",
@@ -1308,7 +1698,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AT",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "4",
+            "column": "3"
         },
         {
             "index": "53",
@@ -1318,7 +1711,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AU",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "4",
+            "column": "4"
         },
         {
             "index": "54",
@@ -1328,7 +1724,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AV",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "4",
+            "column": "5"
         },
         {
             "index": "55",
@@ -1338,7 +1737,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AW",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "4",
+            "column": "6"
         },
         {
             "index": "56",
@@ -1348,7 +1750,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "AX",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "4",
+            "column": "7"
         },
         {
             "index": "59",
@@ -1358,7 +1763,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "DS",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "4",
+            "column": "8"
         },
         {
             "index": "62",
@@ -1368,7 +1776,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "DV",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "4",
+            "column": "11"
         },
         {
             "index": "63",
@@ -1378,7 +1789,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "DW",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "4",
+            "column": "14"
         },
         {
             "index": "64",
@@ -1388,7 +1802,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "DX",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "4",
+            "column": "15"
         },
         {
             "index": "65",
@@ -1398,7 +1815,10 @@
             "table": "A",
             "overlayable": "false",
             "destination_address_string": "SAA",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "4",
+            "column": "16"
         },
         {
             "index": "65",
@@ -1408,7 +1828,10 @@
             "table": "R",
             "overlayable": "false",
             "destination_address_string": "SAR",
-            "ssid": ""
+            "ssid": "",
+            "image": "",
+            "row": "",
+            "column": ""
         },
         {
             "index": "65",
@@ -1418,7 +1841,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SA",
-            "ssid": ""
+            "ssid": "",
+            "image": "",
+            "row": "",
+            "column": ""
         },
         {
             "index": "66",
@@ -1428,7 +1854,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SB",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "5",
+            "column": "1"
         },
         {
             "index": "67",
@@ -1438,7 +1867,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SC",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "5",
+            "column": "2"
         },
         {
             "index": "68",
@@ -1448,7 +1880,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SD",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "5",
+            "column": "3"
         },
         {
             "index": "69",
@@ -1458,7 +1893,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SE",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "5",
+            "column": "4"
         },
         {
             "index": "70",
@@ -1468,7 +1906,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SF",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "5",
+            "column": "5"
         },
         {
             "index": "71",
@@ -1478,7 +1919,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SG",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "5",
+            "column": "6"
         },
         {
             "index": "72",
@@ -1488,7 +1932,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SH",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "5",
+            "column": "7"
         },
         {
             "index": "73",
@@ -1498,7 +1945,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SI",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "5",
+            "column": "8"
         },
         {
             "index": "74",
@@ -1508,7 +1958,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SJ",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "5",
+            "column": "9"
         },
         {
             "index": "75",
@@ -1518,7 +1971,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SK",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "5",
+            "column": "10"
         },
         {
             "index": "76",
@@ -1528,7 +1984,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "5",
+            "column": "11"
         },
         {
             "index": "77",
@@ -1538,7 +1997,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "",
-            "ssid": ""
+            "ssid": "",
+            "image": "",
+            "row": "",
+            "column": ""
         },
         {
             "index": "78",
@@ -1548,7 +2010,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SN",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "5",
+            "column": "13"
         },
         {
             "index": "79",
@@ -1558,7 +2023,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SO",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "5",
+            "column": "14"
         },
         {
             "index": "80",
@@ -1568,7 +2036,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SP",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "5",
+            "column": "15"
         },
         {
             "index": "82",
@@ -1578,7 +2049,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SR",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "5",
+            "column": "16"
         },
         {
             "index": "83",
@@ -1588,7 +2062,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SS",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "6",
+            "column": "2"
         },
         {
             "index": "84",
@@ -1598,7 +2075,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "ST",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "6",
+            "column": "3"
         },
         {
             "index": "85",
@@ -1608,7 +2088,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SU",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "6",
+            "column": "4"
         },
         {
             "index": "86",
@@ -1618,7 +2101,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SV",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "6",
+            "column": "5"
         },
         {
             "index": "87",
@@ -1628,7 +2114,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SW",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "6",
+            "column": "6"
         },
         {
             "index": "88",
@@ -1638,7 +2127,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SY",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "6",
+            "column": "7"
         },
         {
             "index": "89",
@@ -1648,7 +2140,10 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "SZ",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "6",
+            "column": "9"
         },
         {
             "index": "90",
@@ -1658,7 +2153,23 @@
             "table": "\\",
             "overlayable": "true",
             "destination_address_string": "Q1",
-            "ssid": ""
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "6",
+            "column": "10"
+        },
+        {
+            "index": "",
+            "name": "",
+            "description": "",
+            "value": "",
+            "table": "",
+            "overlayable": "",
+            "destination_address_string": "",
+            "ssid": "",
+            "image": "aprs-symbols-24-1.png",
+            "row": "6",
+            "column": "11"
         }
     ]
 }
