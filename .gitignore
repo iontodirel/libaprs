@@ -2,3 +2,4 @@ build/*
 .vscode/*
 tools/symbols/cvs_to_json/external/*
 tests/build/*
+tools/symbols/external/csv.h
