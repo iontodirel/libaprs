@@ -158,6 +158,11 @@ const lookupAprsSymbolByCode = (() => {
   symbolCodeMap['\\{'] = { row: 6, column: 10, image: "aprs-symbols-24-1.png", name: "fog" }
 
   return (symbolTable, symbolCode) => {
+    const code = symbolTable + symbolCode;
+    if (!symbolCodeMap.hasOwnProperty(code)) {
+      return null;
+    }
+    return symbolCodeMap[code];
   };
 
 })();
@@ -322,6 +327,10 @@ const lookupAprsSymbolByName = (() => {
   symbolNameMap['fog'] = { row: 6, column: 10, image: "aprs-symbols-24-1.png", name: "fog" }
 
   return (symbolName) => {
+    if (!symbolNameMap.hasOwnProperty(symbolName)) {
+      return null;
+    }
+    return symbolNameMap[symbolName];
   };
 
 })();

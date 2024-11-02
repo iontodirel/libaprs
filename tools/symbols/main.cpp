@@ -553,7 +553,7 @@ int main()
 
     std::string js;
 
-    js.append("const lookupAprsSymbol = (() => {\n");
+    js.append("const lookupAprsSymbolByCode = (() => {\n");
     js.append("  const symbolCodeMap = {};\n");
 
     for (const auto& symbol : pri_alt_symbols)
@@ -561,11 +561,39 @@ int main()
         if (symbol.image.empty())
             continue;
         js.append(fmt::format("  symbolCodeMap['{}{}'] = ", escape_char(symbol.table), escape_char(symbol.value)));   
-        js.append(fmt::format("{{ row: {}, column: {}, image: \"{}\" }}\n", symbol.row, symbol.column, symbol.image));   
+        js.append(fmt::format("{{ row: {}, column: {}, image: \"{}\", name: \"{}\" }}\n", symbol.row, symbol.column, symbol.image, symbol.name));   
     }
 
     js.append("\n");
     js.append("  return (symbolTable, symbolCode) => {\n");
+    js.append("    const code = symbolTable + symbolCode;\n");
+    js.append("    if (!symbolCodeMap.hasOwnProperty(code)) {\n");
+    js.append("      return null;\n");
+    js.append("    }\n");
+    js.append("    return symbolCodeMap[code];\n");
+    js.append("  };\n");
+    js.append("\n");
+    js.append("})();\n");
+
+    js.append("\n");
+
+    js.append("const lookupAprsSymbolByName = (() => {\n");
+    js.append("  const symbolNameMap = {};\n");
+
+    for (const auto& symbol : pri_alt_symbols)
+    {
+        if (symbol.image.empty())
+            continue;
+        js.append(fmt::format("  symbolNameMap['{}'] = ", symbol.name));   
+        js.append(fmt::format("{{ row: {}, column: {}, image: \"{}\", name: \"{}\" }}\n", symbol.row, symbol.column, symbol.image, symbol.name));   
+    }
+
+    js.append("\n");
+    js.append("  return (symbolName) => {\n");
+    js.append("    if (!symbolNameMap.hasOwnProperty(symbolName)) {\n");
+    js.append("      return null;\n");
+    js.append("    }\n");
+    js.append("    return symbolNameMap[symbolName];\n");
     js.append("  };\n");
     js.append("\n");
     js.append("})();\n");
