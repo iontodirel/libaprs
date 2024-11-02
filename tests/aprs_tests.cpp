@@ -31,7 +31,7 @@
 
 #include <gtest/gtest.h>
 
-#include "aprs.hpp"
+#include "../aprs.hpp"
 
 #include <cstring>
 
