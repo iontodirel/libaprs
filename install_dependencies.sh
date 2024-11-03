@@ -1,3 +1,2 @@
 #!/bin/sh
-apt-get install -y gcc g++ make cmake ninja-build
-apt-get install -y libasound2-dev libudev-dev
+apt-get install -y gcc g++ clang make cmake ninja-build

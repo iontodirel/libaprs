@@ -32,20 +32,11 @@
 #pragma once
 
 #include <string>
-#include <functional>
-#include <span>
 #include <vector>
-#include <memory>
 #include <chrono>
 #include <type_traits>
 #include <concepts>
-#include <iostream>
 #include <cmath>
-#include <iterator>
-#include <cctype>
-#include <tuple>
-#include <tuple>
-#include <charconv>
 #include <deque>
 #include <unordered_map>
 
@@ -88,8 +79,6 @@
 #ifndef APRS_LIB_INLINE
 #define APRS_LIB_INLINE inline
 #endif
-#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
-#endif
 #ifndef APRS_LIB_KISS_NAMESPACE
 #define APRS_LIB_KISS_NAMESPACE kiss
 #endif
@@ -120,7 +109,9 @@
 #ifndef APRS_LIB_AX25_DETAIL_NAMESPACE_END
 #define APRS_LIB_AX25_DETAIL_NAMESPACE_END }
 #endif
-
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+// Intentionally left empty
+#endif
 #define APRS_LIB_SYMBOL_INFO
 
 APRS_LIB_APRS_NAMESPACE_BEGIN

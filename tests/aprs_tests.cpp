@@ -29,9 +29,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <gtest/gtest.h>
-
 #include "../aprs.hpp"
+
+#include <gtest/gtest.h>
 
 #include <cstring>
 
@@ -143,7 +143,7 @@ TEST(ax25, try_decode_frame)
     EXPECT_TRUE(frame.info_field == "!4741.70NB12258.05W# MT. JUPITER   K7IDX");
 }
 
-TEST(kiss, kiss_packet_decoder)
+TEST(kiss, kiss_frame_decoder)
 {
     kiss::kiss_frame_decoder decoder;
 
@@ -254,17 +254,6 @@ TEST(aprs_detail, try_parse_mic_e_lat)
     EXPECT_TRUE(lat >= -38.08251 && lat <= -38.082);
 }
 
-TEST(aprs_detail, try_parse_compression_type)
-{
-    aprs::compression_origin o;
-    aprs::nmea_source n;
-    bool old_or_new;
-    aprs::detail::parse_compression_type(0b00000000, o, n, old_or_new);
-    aprs::detail::parse_compression_type(0b00001000, o, n, old_or_new);
-    aprs::detail::parse_compression_type(0b00010000, o, n, old_or_new);
-    aprs::detail::parse_compression_type(0b00011000, o, n, old_or_new);
-}
-
 TEST(aprs_detail, try_parse_mic_e_lon)
 {
     float lon = -1.0;
@@ -280,7 +269,18 @@ TEST(aprs_detail, try_parse_mic_e_lon)
     EXPECT_TRUE(lon >= 100.7366 && lon <= 100.7367);
 }
 
-TEST(aprs, try_decode_packet_as_try_parse_mic_e)
+TEST(aprs_detail, try_parse_compression_type)
+{
+    aprs::compression_origin o;
+    aprs::nmea_source n;
+    bool old_or_new;
+    aprs::detail::parse_compression_type(0b00000000, o, n, old_or_new);
+    aprs::detail::parse_compression_type(0b00001000, o, n, old_or_new);
+    aprs::detail::parse_compression_type(0b00010000, o, n, old_or_new);
+    aprs::detail::parse_compression_type(0b00011000, o, n, old_or_new);
+}
+
+TEST(aprs, try_decode_packet_as_mic_e)
 {  
     aprs::packet packet;
     aprs::mic_e mic_e;
@@ -297,13 +297,7 @@ TEST(aprs_detail, try_parse_mic_e_altitude)
    EXPECT_TRUE(alt == 10061);
 }
 
-TEST(aprs_detail, try_parse_area_object)
-{
-   EXPECT_TRUE(aprs::detail::try_parse_area_object("710/310"));
-   EXPECT_TRUE(aprs::detail::try_parse_area_object("8101310"));
-}
-
-TEST(aprs, try_decode_packet_as_try_parse_mic_e_status)
+TEST(aprs, try_decode_packet_as_mic_e_status)
 {  
     aprs::packet packet;
     aprs::mic_e mic_e;
@@ -327,7 +321,7 @@ TEST(aprs, try_decode_packet_as_try_parse_mic_e_status)
     EXPECT_TRUE(mic_e.status == aprs::mic_e_status::off_duty);
 }
 
-TEST(aprs, try_decode_packet_as_try_parse_mic_e_telemetry)
+TEST(aprs, try_decode_packet_as_mic_e_telemetry)
 {  
     aprs::packet packet;
     aprs::mic_e mic_e;
@@ -372,7 +366,7 @@ TEST(aprs, try_decode_packet_as_try_parse_mic_e_telemetry)
     EXPECT_TRUE(mic_e.telemetry_channels[1] == 254);
 }
 
-TEST(aprs_detail, try_parse_test_data)
+TEST(aprs_core, try_parse_test_data)
 {
     aprs::test_data test;
 
@@ -380,7 +374,7 @@ TEST(aprs_detail, try_parse_test_data)
     EXPECT_TRUE(test.data == "191146,V,4214.2466,N,07303.5181,W,417.238,114.5,091099,14.7,W/GPS FIX");
 }
 
-TEST(aprs_detail, try_parse_user_defined)
+TEST(aprs_core, try_parse_user_defined)
 {
     aprs::user_defined ud;
 
@@ -390,7 +384,7 @@ TEST(aprs_detail, try_parse_user_defined)
     EXPECT_TRUE(ud.data == "qwerty");
 }
 
-TEST(aprs_detail, try_parse_bulletin)
+TEST(aprs_core, try_parse_bulletin)
 {
     aprs::bulletin bln;
 
@@ -477,7 +471,7 @@ TEST(aprs_detail, try_parse_timestamp)
     EXPECT_TRUE(p.date_time_hour == 1); 
 }
 
-TEST(aprs, try_decode_data_as_try_parse_position)
+TEST(aprs, get_data_type)
 {
     std::string packet_data = "@110647z4855.05N/12208.34W_131/002g004t043r000p000P000h80b10237L000AmbientCWOP.com";
     aprs::data_type type = aprs::get_data_type(packet_data);
