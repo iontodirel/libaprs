@@ -24,7 +24,7 @@ endif()
 
 add_executable (json_to_cpp "main.cpp")
 
-set(SYMBOLS_DIR ${CMAKE_SOURCE_DIR}/../../)
+set(SYMBOLS_DIR ${CMAKE_SOURCE_DIR}/../../symbols)
 
 set(INPUT_CSV_FILE ${SYMBOLS_DIR}/symbols.csv)
 set(OUTPUT_CPP_FILE ${CMAKE_CURRENT_BINARY_DIR}/symbols.cpp)
