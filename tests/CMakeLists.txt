@@ -37,6 +37,10 @@ if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.24.0")
   cmake_policy(SET CMP0135 NEW)
 endif()
 
+if(MSVC)
+	set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+endif()
+
 include(FetchContent)
 
 FetchContent_Declare(

@@ -34,6 +34,8 @@
 #include <string>
 #include <vector>
 #include <chrono>
+#include <algorithm>
+#include <charconv>
 #include <type_traits>
 #include <concepts>
 #include <cmath>
@@ -596,7 +598,7 @@ enum class decoder_hint
     alternate_parse_position_packet
 };
 
-enum class area_object_type : uint
+enum class area_object_type : unsigned int
 {
     open_circle = '0',
     line_offset_down_right = '1',
@@ -610,7 +612,7 @@ enum class area_object_type : uint
     color_filled_box = '9'
 };
 
-enum class area_object_color_intensity : uint
+enum class area_object_color_intensity : unsigned int
 {
     black_high = '0',
     blue_high = '1',
@@ -1489,7 +1491,7 @@ APRS_LIB_INLINE bool try_parse_mic_e_altitude(std::string_view alt_str, float& a
 
 APRS_LIB_INLINE bool try_parse_number(std::string_view number_str, int& number)
 {
-    auto [ptr, ec] = std::from_chars(number_str.begin(), number_str.end(), number);
+    auto [ptr, ec] = std::from_chars(number_str.data(), number_str.data() + number_str.size(), number);
     return ec == std::errc();
 };
 
@@ -2551,7 +2553,7 @@ APRS_LIB_INLINE bool try_parse_area_object_color_intensity(std::string_view obje
     {
         if (isdigit(object_color_intensity[1]))
         {
-            color_intensity = (area_object_color_intensity)(uint)object_color_intensity[1];
+            color_intensity = (area_object_color_intensity)(unsigned int)object_color_intensity[1];
         }
     }
     else
