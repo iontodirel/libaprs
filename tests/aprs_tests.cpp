@@ -35,99 +35,6 @@
 
 #include <cstring>
 
-TEST(aprs_detail, try_parse_symbol_simple)
-{
-    aprs::packet packet;
-    packet.destination_address = "TW3WYQ";
-    packet.data = "`2Ajl \x1Cv/]\"3r}MONITORING 146.520=";
-
-    aprs::mic_e mic_e;
-    aprs::try_decode_packet_as(packet, mic_e);
-
-    aprs::symbol symbol;
-    aprs::symbol_overlay symbol_overlay;
-    aprs::try_parse_symbol(mic_e, symbol, symbol_overlay);
-    aprs::try_parse_symbol(mic_e.symbol_table, mic_e.symbol_code, symbol, symbol_overlay);
-    aprs::detail::try_parse_uncompressed_symbol(mic_e.symbol_table, mic_e.symbol_code, symbol, symbol_overlay);    
-
-    EXPECT_TRUE(symbol == aprs::symbol::van);
-    EXPECT_TRUE(symbol_overlay == aprs::symbol_overlay::none);    
-    EXPECT_TRUE(aprs::to_string(symbol) == "van");
-
-    aprs::symbol_info symbol_info = aprs::get_symbol_info(symbol);
-
-    EXPECT_TRUE(symbol_info.name == "van");
-    EXPECT_TRUE(symbol_info.description == "Van");
-
-    aprs::try_parse_symbol("van", symbol);
-
-    EXPECT_TRUE(symbol == aprs::symbol::van);
-}
-
-TEST(aprs_detail, try_parse_symbol)
-{
-    aprs::symbol symbol;
-    aprs::symbol_overlay symbol_overlay;
-    EXPECT_TRUE(aprs::detail::try_parse_uncompressed_symbol('I', '&', symbol, symbol_overlay));
-    EXPECT_TRUE(symbol == aprs::symbol::hf_gateway_diamond);
-    EXPECT_TRUE(symbol_overlay == aprs::symbol_overlay::overlay_i);
-    EXPECT_TRUE(aprs::to_string(symbol) == "hf_gateway_diamond");
-    EXPECT_TRUE(aprs::try_parse_symbol("hf_gateway_diamond", symbol));
-
-    EXPECT_TRUE(aprs::detail::try_parse_uncompressed_symbol('B', '#', symbol, symbol_overlay));
-    EXPECT_TRUE(symbol == aprs::symbol::digi_green);
-    EXPECT_TRUE(symbol_overlay == aprs::symbol_overlay::overlay_b);
-    EXPECT_TRUE(aprs::to_string(symbol) == "digi_green");
-
-    EXPECT_TRUE(aprs::detail::try_parse_uncompressed_symbol('/', '-', symbol, symbol_overlay));
-    EXPECT_TRUE(symbol == aprs::symbol::home);
-    EXPECT_TRUE(symbol_overlay == aprs::symbol_overlay::none);
-    EXPECT_TRUE(aprs::to_string(symbol) == "home");
-
-    EXPECT_TRUE(aprs::detail::try_parse_uncompressed_symbol('/', '1', symbol, symbol_overlay));
-    EXPECT_TRUE(symbol == aprs::symbol::circle_1);
-    EXPECT_TRUE(symbol_overlay == aprs::symbol_overlay::none);
-    EXPECT_TRUE(aprs::to_string(symbol) == "circle_1");
-
-    EXPECT_TRUE(aprs::detail::try_parse_compressed_symbol('d', '>', symbol, symbol_overlay));
-    EXPECT_TRUE(symbol == aprs::symbol::car2);
-    EXPECT_TRUE(symbol_overlay == aprs::symbol_overlay::overlay_3);
-    EXPECT_TRUE(aprs::to_string(symbol) == "car2");
-
-    symbol = aprs::symbol::church;
-    aprs::symbol_info symbol_info = aprs::get_symbol_info(symbol);
-    EXPECT_TRUE(symbol_info.name == "church");
-    EXPECT_TRUE(symbol_info.index == 11);
-    EXPECT_TRUE(symbol_info.description == "Church");
-    EXPECT_TRUE(symbol_info.value == '+');
-    EXPECT_TRUE(symbol_info.table == '\\');
-    EXPECT_TRUE(symbol_info.overlayable == true);
-    EXPECT_TRUE(symbol_info.destination_address == "OL");
-
-    EXPECT_TRUE(aprs::try_parse_symbol("church", symbol));
-    EXPECT_TRUE(symbol == aprs::symbol::church);
-}
-
-TEST(aprs_detail, symbol_map)
-{
-    aprs::symbol s;
-    aprs::symbol_info si;
-    aprs::detail::symbol_map& map0 = aprs::detail::symbol_map::instance();
-    aprs::detail::symbol_map& map1 = aprs::detail::symbol_map::instance();
-    EXPECT_TRUE(&map0 == &map1);
-    aprs::detail::symbol_map::instance().try_get_symbol_by_value('I', s);
-    EXPECT_TRUE(s == aprs::symbol::tcp_ip);
-    aprs::detail::symbol_map::instance().try_get_symbol_by_value('!', s);    
-    EXPECT_TRUE(s == aprs::symbol::police_station);
-    aprs::detail::symbol_map::instance().try_get_symbol_by_value('&', s);
-    EXPECT_TRUE(s == aprs::symbol::hf_gateway);
-    si = aprs::detail::symbol_map::instance().get_symbol_info(s);
-    aprs::detail::symbol_map::instance().try_get_symbol_by_value('!' + 200, s);
-    aprs::detail::symbol_map::instance().try_get_symbol_by_destination_address("BN", s);
-    si = aprs::detail::symbol_map::instance().get_symbol_info(s);
-    si = aprs::detail::symbol_map::instance().get_symbol_info(aprs::symbol::no_symbol);
-}
-
 TEST(ax25, try_decode_frame)
 {
     ax25::frame frame;
@@ -482,7 +389,7 @@ TEST(aprs, get_data_type)
     }
 }
 
-TEST(aprs, basic_position_and_mic_e_position)
+TEST(aprs, try_decode_data_as_position_and_mic_e)
 {
     std::string packet_data = "!4903.50N/07201.75W-Test 001234";
     EXPECT_TRUE(aprs::get_data_type(packet_data) == aprs::data_type::position);
@@ -541,6 +448,99 @@ TEST(aprs, basic_position_and_mic_e_position)
     EXPECT_TRUE(mic_e.lat >= 47.61 && mic_e.lat < 47.610001);
     EXPECT_TRUE(mic_e.lon >= -122.65351 && mic_e.lon < -122.6535);
     EXPECT_TRUE(mic_e.status == aprs::mic_e_status::in_service);
+}
+
+TEST(aprs_detail, try_parse_symbol_simple)
+{
+    aprs::packet packet;
+    packet.destination_address = "TW3WYQ";
+    packet.data = "`2Ajl \x1Cv/]\"3r}MONITORING 146.520=";
+
+    aprs::mic_e mic_e;
+    aprs::try_decode_packet_as(packet, mic_e);
+
+    aprs::symbol symbol;
+    aprs::symbol_overlay symbol_overlay;
+    aprs::try_parse_symbol(mic_e, symbol, symbol_overlay);
+    aprs::try_parse_symbol(mic_e.symbol_table, mic_e.symbol_code, symbol, symbol_overlay);
+    aprs::detail::try_parse_uncompressed_symbol(mic_e.symbol_table, mic_e.symbol_code, symbol, symbol_overlay);
+
+    EXPECT_TRUE(symbol == aprs::symbol::van);
+    EXPECT_TRUE(symbol_overlay == aprs::symbol_overlay::none);
+    EXPECT_TRUE(aprs::to_string(symbol) == "van");
+
+    aprs::symbol_info symbol_info = aprs::get_symbol_info(symbol);
+
+    EXPECT_TRUE(symbol_info.name == "van");
+    EXPECT_TRUE(symbol_info.description == "Van");
+
+    aprs::try_parse_symbol("van", symbol);
+
+    EXPECT_TRUE(symbol == aprs::symbol::van);
+}
+
+TEST(aprs_detail, try_parse_symbol)
+{
+    aprs::symbol symbol;
+    aprs::symbol_overlay symbol_overlay;
+    EXPECT_TRUE(aprs::detail::try_parse_uncompressed_symbol('I', '&', symbol, symbol_overlay));
+    EXPECT_TRUE(symbol == aprs::symbol::hf_gateway_diamond);
+    EXPECT_TRUE(symbol_overlay == aprs::symbol_overlay::overlay_i);
+    EXPECT_TRUE(aprs::to_string(symbol) == "hf_gateway_diamond");
+    EXPECT_TRUE(aprs::try_parse_symbol("hf_gateway_diamond", symbol));
+
+    EXPECT_TRUE(aprs::detail::try_parse_uncompressed_symbol('B', '#', symbol, symbol_overlay));
+    EXPECT_TRUE(symbol == aprs::symbol::digi_green);
+    EXPECT_TRUE(symbol_overlay == aprs::symbol_overlay::overlay_b);
+    EXPECT_TRUE(aprs::to_string(symbol) == "digi_green");
+
+    EXPECT_TRUE(aprs::detail::try_parse_uncompressed_symbol('/', '-', symbol, symbol_overlay));
+    EXPECT_TRUE(symbol == aprs::symbol::home);
+    EXPECT_TRUE(symbol_overlay == aprs::symbol_overlay::none);
+    EXPECT_TRUE(aprs::to_string(symbol) == "home");
+
+    EXPECT_TRUE(aprs::detail::try_parse_uncompressed_symbol('/', '1', symbol, symbol_overlay));
+    EXPECT_TRUE(symbol == aprs::symbol::circle_1);
+    EXPECT_TRUE(symbol_overlay == aprs::symbol_overlay::none);
+    EXPECT_TRUE(aprs::to_string(symbol) == "circle_1");
+
+    EXPECT_TRUE(aprs::detail::try_parse_compressed_symbol('d', '>', symbol, symbol_overlay));
+    EXPECT_TRUE(symbol == aprs::symbol::car2);
+    EXPECT_TRUE(symbol_overlay == aprs::symbol_overlay::overlay_3);
+    EXPECT_TRUE(aprs::to_string(symbol) == "car2");
+
+    symbol = aprs::symbol::church;
+    aprs::symbol_info symbol_info = aprs::get_symbol_info(symbol);
+    EXPECT_TRUE(symbol_info.name == "church");
+    EXPECT_TRUE(symbol_info.index == 11);
+    EXPECT_TRUE(symbol_info.description == "Church");
+    EXPECT_TRUE(symbol_info.value == '+');
+    EXPECT_TRUE(symbol_info.table == '\\');
+    EXPECT_TRUE(symbol_info.overlayable == true);
+    EXPECT_TRUE(symbol_info.destination_address == "OL");
+
+    EXPECT_TRUE(aprs::try_parse_symbol("church", symbol));
+    EXPECT_TRUE(symbol == aprs::symbol::church);
+}
+
+TEST(aprs_detail, symbol_map)
+{
+    aprs::symbol s;
+    aprs::symbol_info si;
+    aprs::detail::symbol_map& map0 = aprs::detail::symbol_map::instance();
+    aprs::detail::symbol_map& map1 = aprs::detail::symbol_map::instance();
+    EXPECT_TRUE(&map0 == &map1);
+    aprs::detail::symbol_map::instance().try_get_symbol_by_value('I', s);
+    EXPECT_TRUE(s == aprs::symbol::tcp_ip);
+    aprs::detail::symbol_map::instance().try_get_symbol_by_value('!', s);
+    EXPECT_TRUE(s == aprs::symbol::police_station);
+    aprs::detail::symbol_map::instance().try_get_symbol_by_value('&', s);
+    EXPECT_TRUE(s == aprs::symbol::hf_gateway);
+    si = aprs::detail::symbol_map::instance().get_symbol_info(s);
+    aprs::detail::symbol_map::instance().try_get_symbol_by_value('!' + 200, s);
+    aprs::detail::symbol_map::instance().try_get_symbol_by_destination_address("BN", s);
+    si = aprs::detail::symbol_map::instance().get_symbol_info(s);
+    si = aprs::detail::symbol_map::instance().get_symbol_info(aprs::symbol::no_symbol);
 }
 
 int main(int argc, char** argv)
