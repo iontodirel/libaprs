@@ -29,6 +29,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// Parts of this library uses code from libaprsroute: https://github.com/iontodirel/libaprsroute
+// Copyright (c) 2024 Ion Todirel
+// 
+// Parts of this library uses code from position-lib: https://github.com/iontodirel/position-lib
+// Copyright (c) 2023 Ion Todirel
+//
+// References:
+//
+//   - APRS specification: http://www.aprs.org/doc/APRS101.PDF
+//   - APRS 1.1 specification addendum: http://www.aprs.org/aprs11.html
+//   - APRS 1.2 specification addendum: http://www.aprs.org/aprs12.html
+//   - Understanding APRS Packets: https://github.com/wb2osz/direwolf-doc/blob/main/Understanding-APRS-Packets.pdf
+//   - APRS TO-CALL VERSION NUMBERS: http://www.aprs.org/aprs11/tocalls.txt
+//   - Mic-E TYPE CODES: http://www.aprs.org/aprs12/mic-e-types.txt
+//   - Mic-E TEST EXAMPLES: http://www.aprs.org/aprs12/mic-e-examples.txt
+//   - Q Construct: https://www.aprs-is.net/q.aspx
+//   - KISS Protocol: https://www.ax25.net/kiss.aspx
+//   - AX.25 Protocol: https://www.tapr.org/pdf/AX25.2.2.pdf
+
 #pragma once
 
 #include <string>
@@ -41,6 +60,8 @@
 #include <cmath>
 #include <deque>
 #include <unordered_map>
+#include <memory>
+#include <span>
 
 #ifndef APRS_LIB_APRS_NAMESPACE
 #define APRS_LIB_APRS_NAMESPACE aprs
@@ -66,17 +87,26 @@
 #ifndef APRS_LIB_APRS_CORE_NAMESPACE_END
 #define APRS_LIB_APRS_CORE_NAMESPACE_END }
 #endif
-#ifndef APRS_LIB_NAMESPACE_END
-#define APRS_LIB_NAMESPACE_END }
+#ifndef APRS_LIB_APRS_NAMESPACE_END
+#define APRS_LIB_APRS_NAMESPACE_END }
+#endif
+#ifndef APRS_LIB_APRS_NAMESPACE_USE
+#define APRS_LIB_APRS_NAMESPACE_USE using namespace APRS_LIB_APRS_NAMESPACE;
 #endif
 #ifndef APRS_LIB_APRS_DETAIL_NAMESPACE_USE
-#define APRS_LIB_APRS_DETAIL_NAMESPACE_USE using namespace APRS_LIB_APRS_DETAIL_NAMESPACE;
+#define APRS_LIB_APRS_DETAIL_NAMESPACE_USE using namespace APRS_LIB_APRS_NAMESPACE :: APRS_LIB_APRS_DETAIL_NAMESPACE;
+#endif
+#ifndef APRS_LIB_APRS_CORE_NAMESPACE_USE
+#define APRS_LIB_APRS_CORE_NAMESPACE_USE using namespace APRS_LIB_APRS_NAMESPACE :: APRS_LIB_APRS_CORE_NAMESPACE;
+#endif
+#ifndef APRS_LIB_APRS_NAMESPACE_REFERENCE
+#define APRS_LIB_APRS_NAMESPACE_REFERENCE APRS_LIB_APRS_NAMESPACE ::
 #endif
 #ifndef APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE
-#define APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE APRS_LIB_APRS_DETAIL_NAMESPACE ::
+#define APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE APRS_LIB_APRS_NAMESPACE :: APRS_LIB_APRS_DETAIL_NAMESPACE ::
 #endif
 #ifndef APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE
-#define APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE APRS_LIB_APRS_CORE_NAMESPACE ::
+#define APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE APRS_LIB_APRS_NAMESPACE :: APRS_LIB_APRS_CORE_NAMESPACE ::
 #endif
 #ifndef APRS_LIB_INLINE
 #define APRS_LIB_INLINE inline
@@ -89,6 +119,9 @@
 #endif
 #ifndef APRS_LIB_KISS_NAMESPACE_END
 #define APRS_LIB_KISS_NAMESPACE_END }
+#endif
+#ifndef APRS_LIB_KISS_DETAIL_NAMESPACE_REFERENCE
+#define APRS_LIB_KISS_DETAIL_NAMESPACE_REFERENCE APRS_LIB_KISS_NAMESPACE :: APRS_LIB_APRS_DETAIL_NAMESPACE ::
 #endif
 #ifndef APRS_LIB_AX25_NAMESPACE
 #define APRS_LIB_AX25_NAMESPACE ax25
@@ -116,20 +149,20 @@
 #endif
 #define APRS_LIB_SYMBOL_INFO
 
-APRS_LIB_APRS_NAMESPACE_BEGIN
-
 // **************************************************************** //
 //                                                                  //
 // CONCEPTS                                                         //
 //                                                                  //
 // **************************************************************** //
 
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
 APRS_LIB_APRS_DETAIL_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 template<typename T, typename ... U>
 concept IsAnyOf = (std::same_as<T, U> || ...);
-
-#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 template <typename T>
 concept DateTimeSpec = requires(T t)
@@ -149,7 +182,7 @@ concept PositionSpec = requires(T t)
 };
 
 template <typename T>
-concept PacketWithSymbolSpec = requires(T t)
+concept SymbolSpec = requires(T t)
 {
     requires std::same_as<decltype(t.symbol_table), char>;
     requires std::same_as<decltype(t.symbol_code), char>;
@@ -166,21 +199,45 @@ concept AliveDeadEnumSpec = requires(Enum e)
 template <typename T>
 concept PacketSpec = requires(T t)
 {    
-    requires std::same_as<decltype(t.destination_address), std::string>;
-    requires std::same_as<decltype(t.data), std::string>;
+    requires std::convertible_to<decltype(t.to), std::string>;
+    requires std::convertible_to<decltype(t.data), std::string>;
 };
 
-#endif
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
-APRS_LIB_NAMESPACE_END
-    
+APRS_LIB_APRS_DETAIL_NAMESPACE_END
+
+APRS_LIB_APRS_NAMESPACE_END
+
 // **************************************************************** //
+//                                                                  //
+//                                                                  //
 //                                                                  //
 //                                                                  //
 // TYPES                                                            //
 //                                                                  //
 //                                                                  //
+//                                                                  //
+//                                                                  //
 // **************************************************************** //
+
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
+struct packet
+{
+    packet() = default;
+    packet(const packet& other) = default;
+    packet& operator=(const packet& other) = default;
+    packet(const std::string& from, const std::string& to, const std::vector<std::string>& path, const std::string& data);
+    packet(const char* packet_string);
+    packet(const std::string packet_string);
+    operator std::string() const;
+
+    std::string from;
+    std::string to;
+    std::vector<std::string> path;
+    std::string data;
+};
 
 enum class data_type : int
 {
@@ -190,11 +247,17 @@ enum class data_type : int
     position_without_timestamp,
     position_compressed_with_timestamp,
     position_compressed_without_timestamp,
+    position_without_timestamp_and_with_data_ext,
+    position_with_timestamp_and_with_data_ext,
     object,
     object_with_data_ext,
     object_without_data_ext,
+    object_with_position,
     object_with_compressed_position,
+    object_with_compressed_position_and_with_timestamp,
+    object_with_compressed_position_and_without_timestamp,
     item,
+    item_with_position,
     item_with_compressed_position,
     message,
     message_ack,
@@ -203,16 +266,6 @@ enum class data_type : int
     bulletin,
     user_defined,
     test_data
-};
-
-struct packet
-{
-    std::string source_address;
-    int source_address_ssid = -1;
-    std::string destination_address;
-    int destination_address_ssid = -1;
-    std::vector<std::string> path;
-    std::string data;
 };
 
 struct message
@@ -305,6 +358,7 @@ struct mic_e
     float lon = -1.0;
     mic_e_status status = mic_e_status::uknown;
     std::vector<int> telemetry_channels;
+    std::string text;
 };
 
 struct bulletin
@@ -568,7 +622,7 @@ struct symbol_info
     int ssid = -1;
 };
 
-#endif
+#endif // APRS_LIB_SYMBOL_INFO
 
 enum class compression_origin : int
 {
@@ -671,7 +725,169 @@ enum class client_id
     picoaprs
 };
 
+APRS_LIB_APRS_NAMESPACE_END
+
 // **************************************************************** //
+//                                                                  //
+// FORMATTER                                                        //
+//                                                                  //
+// **************************************************************** //
+
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
+struct formatter
+{
+    virtual bool try_encode(const packet& p, std::span<unsigned char>) const = 0;
+    virtual bool try_decode(std::span<unsigned char>) = 0;
+    virtual const std::vector<packet>& data() const = 0;
+    virtual int count() const = 0;
+    virtual void clear() = 0;
+    virtual ~formatter() {}
+    virtual std::unique_ptr<formatter> clone() const = 0;
+};
+
+APRS_LIB_APRS_NAMESPACE_END
+
+// **************************************************************** //
+//                                                                  //
+//                                                                  //
+// TYPES                                                            //
+//                                                                  //
+//                                                                  //
+// **************************************************************** //
+
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
+APRS_LIB_APRS_CORE_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+enum class q_construct
+{
+    none,
+    qAC, // Server: Verified login via bidirectional port.
+    qAX, // Server: Unverified login.
+    qAU, // Server: Direct via UDP.
+    qAo, // Server: Gated packet via client-only port.
+    qAO, // Server: Non-gated packet via send-only port or indirect packet via client-only port. Client: Gated packet from RF without messaging.
+    qAS, // Server: Packet via server without q construct.
+    qAr, // Server: Gated packet using ,I construct from remote IGate.
+    qAR, // Server: Gated packet using ,I construct with verified IGate login. Client: Gated packet from RF.
+    qAZ, // Client: Server-client command packet.
+    qAI  // Client: Trace packet.
+};
+
+enum class address_kind
+{
+    other,
+    wide,
+    trace,
+    relay,
+    echo,
+    gate,
+    temp,
+    tcpxx,
+    tcpip,
+    nogate,
+    rfonly,
+    igatecall,
+    q,
+    opntrk,
+    opntrc
+};
+
+struct address
+{
+    address() = default;
+    address(const address& other) = default;
+    address& operator=(const address& other) = default;
+    address(const char* address_string);
+    address(const std::string address_string);
+    bool operator==(const address& rhs) const;
+    bool operator!=(const address& rhs) const;
+    operator std::string() const;
+
+    std::string text;
+    int n = 0;
+    int N = 0;
+    int ssid = 0;
+    bool mark = false;
+    address_kind kind = address_kind::other;
+    q_construct q = q_construct::none;
+    size_t index = 0;  // index inside the packet path
+    size_t offset = 0; // string offset within the packet
+    size_t length = 0; // the string length of the address
+
+    /*
+    
+
+
+    
+     */
+};
+
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_APRS_NAMESPACE_END
+
+APRS_LIB_APRS_CORE_NAMESPACE_END
+
+// **************************************************************** //
+//                                                                  //
+// SYMBOL MAP                                                       //
+//                                                                  //
+// **************************************************************** //
+
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+struct symbol_map
+{
+    static symbol_map& instance()
+    {
+        static symbol_map instance;
+        instance.populate();
+        return instance;
+    }
+
+    bool try_get_symbol_by_destination_address(std::string destination_address, symbol& symbol);
+    bool try_get_symbol_by_value(int value, symbol& symbol);
+    bool try_get_symbol_by_name(const std::string& name, symbol& symbol);
+
+#ifdef APRS_LIB_SYMBOL_INFO
+    symbol_info& get_symbol_info(symbol symbol);
+#endif // APRS_LIB_SYMBOL_INFO
+
+private:
+    symbol_map() = default;
+    ~symbol_map() = default;
+
+    void populate();
+
+    std::unordered_map<int, int> symbol_code_map;
+    std::unordered_map<std::string, int> symbol_name_map;
+    std::unordered_map<std::string, int> destination_address_map;
+#ifdef APRS_LIB_SYMBOL_INFO
+    std::vector<symbol_info> symbols;
+    symbol_info no_symbol;
+#endif // APRS_LIB_SYMBOL_INFO
+    bool populated = false;
+};
+
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_APRS_NAMESPACE_END
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_END
+
+// **************************************************************** //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+//                                                                  //
 //                                                                  //
 //                                                                  //
 //                                                                  //
@@ -681,34 +897,76 @@ enum class client_id
 //                                                                  //
 //                                                                  //
 //                                                                  //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+//                                                                  //
 // **************************************************************** //
 
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
 // **************************************************************** //
+//                                                                  //
 // TYPE SUPPORT                                                     //
+//                                                                  //
 // **************************************************************** //
 
 APRS_LIB_INLINE bool operator==(data_type first,  data_type second);
 APRS_LIB_INLINE std::string to_string(const data_type& t);
-APRS_LIB_INLINE std::string to_string(const packet& m);
 APRS_LIB_INLINE std::string to_string(const symbol& s);
+
 APRS_LIB_INLINE bool try_parse_symbol(const std::string& symbol_name, symbol& symbol);
 
 // **************************************************************** //
+//                                                                  //
+// PACKET                                                           //
+//                                                                  //
+// **************************************************************** //
+
+APRS_LIB_INLINE bool operator==(const packet& lhs, const packet& rhs);
+APRS_LIB_INLINE bool operator!=(const packet& lhs, const packet& rhs);
+APRS_LIB_INLINE std::string to_string(const struct packet& packet);
+APRS_LIB_INLINE bool try_decode_packet(std::string_view packet_string, packet& result);
+
+// **************************************************************** //
+//                                                                  //
 // SYMBOLS                                                          //
+//                                                                  //
 // **************************************************************** //
 
 #ifdef APRS_LIB_SYMBOL_INFO
 APRS_LIB_INLINE symbol_info& get_symbol_info(const symbol& s);
-#endif
+#endif // APRS_LIB_SYMBOL_INFO
 
-template <APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE PacketWithSymbolSpec P>
-APRS_LIB_INLINE bool try_parse_symbol(const P& data, symbol& symbol, symbol_overlay& symbol_overlay);
+template <APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE SymbolSpec S>
+APRS_LIB_INLINE bool try_parse_symbol(const S& s, symbol& symbol, symbol_overlay& symbol_overlay);
 
 APRS_LIB_INLINE bool try_parse_symbol(char symbol_table, char symbol_code, symbol& symbol, symbol_overlay& symbol_overlay);
+
+APRS_LIB_APRS_NAMESPACE_END
+
+// **************************************************************** //
+//                                                                  //
+// ADDRESS                                                          //
+//                                                                  //
+// **************************************************************** //
+
+APRS_LIB_APRS_NAMESPACE_BEGIN
 
 APRS_LIB_APRS_CORE_NAMESPACE_BEGIN
 
 #ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_INLINE std::string to_string(const struct address& address);
+APRS_LIB_INLINE q_construct parse_q_construct(const std::string& input);
+APRS_LIB_INLINE address_kind parse_address_kind(const std::string& text);
+APRS_LIB_INLINE bool try_parse_address(std::string_view address_string, address& result);
+
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_APRS_CORE_NAMESPACE_END
+
+APRS_LIB_APRS_NAMESPACE_END
 
 // **************************************************************** //
 //                                                                  //
@@ -718,8 +976,13 @@ APRS_LIB_APRS_CORE_NAMESPACE_BEGIN
 //                                                                  //
 // **************************************************************** //
 
-template <APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE PacketSpec P>
-APRS_LIB_INLINE bool try_parse_mic_e(const P& packet, mic_e& mic_e);
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
+APRS_LIB_APRS_CORE_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_INLINE bool try_parse_mic_e(const struct packet& packet, struct mic_e& mic_e);
 APRS_LIB_INLINE bool try_parse_mic_e(std::string_view destination_address, std::string_view data, mic_e& mic_e);
 APRS_LIB_INLINE bool try_parse_item_with_compressed_position(std::string_view destination_address, item& item);
 APRS_LIB_INLINE bool try_parse_item(std::string_view data, item& item);
@@ -737,58 +1000,23 @@ APRS_LIB_INLINE bool try_parse_nws_bulletin(std::string_view data, nws_bulletin&
 APRS_LIB_INLINE bool try_parse_user_defined(std::string_view data, user_defined& user_defined);
 APRS_LIB_INLINE bool try_parse_test_data(std::string_view data, test_data& test_data);
 
-#endif
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 APRS_LIB_APRS_CORE_NAMESPACE_END
 
+APRS_LIB_APRS_NAMESPACE_END
+
+// **************************************************************** //
+//                                                                  //
+// COORDINATE PARSING                                               //
+//                                                                  //
+// **************************************************************** //
+
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
 APRS_LIB_APRS_DETAIL_NAMESPACE_BEGIN
 
-// **************************************************************** //
-//                                                                  //
-//                                                                  //
-// SYMBOLS                                                          //
-//                                                                  //
-//                                                                  //
-// **************************************************************** //
-
-struct symbol_map
-{
-    static symbol_map& instance()
-    {
-        static symbol_map instance;
-        instance.populate();
-        return instance;
-    }
-
-    bool try_get_symbol_by_destination_address(std::string destination_address, symbol& symbol);
-    bool try_get_symbol_by_value(int value, symbol& symbol);
-    bool try_get_symbol_by_name(const std::string& name, symbol& symbol);
-
-#ifdef APRS_LIB_SYMBOL_INFO
-    symbol_info& get_symbol_info(symbol symbol);
-#endif
-
-private:
-    symbol_map() = default;
-    ~symbol_map() = default;
-
-    void populate();
-
-    std::unordered_map<int, int> symbol_code_map;
-    std::unordered_map<std::string, int> symbol_name_map;
-    std::unordered_map<std::string, int> destination_address_map;
-#ifdef APRS_LIB_SYMBOL_INFO
-    std::vector<symbol_info> symbols;
-    symbol_info no_symbol;
-#endif
-    bool populated = false;
-};
-
 #ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
-
-// **************************************************************** //
-// COORDINATE PARSING                                               //
-// **************************************************************** //
 
 APRS_LIB_INLINE bool try_get_coordinate_ambiguity(std::string_view pos_str, int& lat_ambiguity, int& lon_ambiguity);
 APRS_LIB_INLINE bool try_parse_coordinates(std::string_view lat_str, std::string_view lon_str, float& lat, float& lon);
@@ -802,38 +1030,90 @@ APRS_LIB_INLINE bool try_parse_mic_e_lat(std::string_view dest_str, float& lat);
 APRS_LIB_INLINE bool try_parse_mic_e_lon(std::string_view dest_str, std::string_view lon_str, float& lon);
 APRS_LIB_INLINE bool try_parse_mic_e_altitude(std::string_view alt_str, float& alt);
 
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_END
+
+APRS_LIB_APRS_NAMESPACE_END
+
 // **************************************************************** //
+//                                                                  //
 // UTILS                                                            //
+//                                                                  //
 // **************************************************************** //
+
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 APRS_LIB_INLINE bool try_parse_number(std::string_view number_str, int& number);
 APRS_LIB_INLINE std::string trim(const std::string& str);
 
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_END
+
+APRS_LIB_APRS_NAMESPACE_END
+
 // **************************************************************** //
+//                                                                  //
 // TIME PARSING                                                     //
+//                                                                  //
 // **************************************************************** //
+
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 template <APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE DateTimeSpec T>
 APRS_LIB_INLINE bool try_parse_timestamp(std::string_view timestamp, T& t_with_datetime);
 
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_END
+
+APRS_LIB_APRS_NAMESPACE_END
+
 // **************************************************************** //
+//                                                                  //
 // QUERIES                                                          //
+//                                                                  //
 // **************************************************************** //
+
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 APRS_LIB_INLINE bool try_get_position_with_timestamp_is_compressed(std::string_view data, bool& compressed);
 APRS_LIB_INLINE bool try_get_position_without_timestamp_is_compressed(std::string_view data, bool& compressed);
 APRS_LIB_INLINE bool try_get_object_is_compressed(std::string_view data, bool& compressed);
 APRS_LIB_INLINE bool try_get_item_is_compressed(std::string_view data, bool& compressed);
 
-#endif
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 APRS_LIB_APRS_DETAIL_NAMESPACE_END
 
-APRS_LIB_APRS_DETAIL_NAMESPACE_BEGIN
+APRS_LIB_APRS_NAMESPACE_END
 
 // **************************************************************** //
+//                                                                  //
+//                                                                  //
 // PARSING SUPPORT                                                  //
+//                                                                  //
+//                                                                  //
 // **************************************************************** //
+
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 APRS_LIB_INLINE bool try_parse_mic_e_telemetry(std::string_view data, mic_e& mic_e);
 APRS_LIB_INLINE bool try_get_mic_e_has_telemetry(std::string_view data, bool& has_telemetry);
@@ -843,6 +1123,7 @@ APRS_LIB_INLINE bool try_parse_area_object(std::string_view area_object_str);
 APRS_LIB_INLINE bool try_parse_area_object_color_intensity(std::string_view object_color_intensity, area_object_color_intensity& color_intensity);
 APRS_LIB_INLINE void parse_compression_type(const char t, int& compression_origin, int& nmea_source, bool& old_or_current);
 APRS_LIB_INLINE void parse_compression_type(const char t, compression_origin& compression_origin, nmea_source& nmea_source, bool& old_or_current);
+APRS_LIB_INLINE bool try_parse_symbol(char symbol_table, char symbol_code, symbol& symbol_, symbol_overlay& symbol_overlay_);
 APRS_LIB_INLINE bool try_parse_symbol_no_overlay(char symbol_table, char symbol_code, symbol& symbol_);
 APRS_LIB_INLINE bool try_parse_uncompressed_symbol(char symbol_table, char symbol_code, symbol& symbol, symbol_overlay& symbol_overlay);
 APRS_LIB_INLINE bool try_parse_compressed_symbol(char symbol_table, char symbol_code, symbol& symbol_, symbol_overlay& symbol_overlay_);
@@ -854,11 +1135,23 @@ APRS_LIB_INLINE bool try_parse_overlayable_compressed_symbol(char symbol_table, 
 APRS_LIB_INLINE bool try_parse_uncompressed_symbol_overlay(char symbol_table, symbol_overlay& symbol_overlay_);
 APRS_LIB_INLINE bool try_parse_compressed_symbol_overlay(char symbol_table, symbol_overlay& symbol_overlay_);
 
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_END
+
+APRS_LIB_APRS_NAMESPACE_END
+
 // **************************************************************** //
+//                                                                  //
 // QUERIES                                                          //
 //                                                                  //
-// Use to disambiguate                                              //
 // **************************************************************** //
+
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 APRS_LIB_INLINE bool try_get_position_with_timestamp_is_compressed(std::string_view data, bool& compressed);
 APRS_LIB_INLINE bool try_get_position_without_timestamp_is_compressed(std::string_view data, bool& compressed);
@@ -871,114 +1164,304 @@ APRS_LIB_INLINE bool is_overlayable_symbol(char symbol_code);
 APRS_LIB_INLINE bool is_symbol_overlayable_with_uncompressed_overlay(char symbol_table);
 APRS_LIB_INLINE bool is_symbol_overlayable_with_compressed_overlay(char symbol_table);
 
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_END
+
+APRS_LIB_APRS_NAMESPACE_END
+
 // **************************************************************** //
+//                                                                  //
 // TESTS                                                            //
+//                                                                  //
 // **************************************************************** //
+
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 APRS_LIB_INLINE bool test_is_position(std::string_view data);
 APRS_LIB_INLINE bool test_is_mic_e(std::string_view data);
 
-APRS_LIB_APRS_CORE_NAMESPACE_END
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_END
+
+APRS_LIB_APRS_NAMESPACE_END
 
 // **************************************************************** //
 //                                                                  //
 //                                                                  //
-// TYPE IMPLEMENTATION AND SUPPORT                                  //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+// IMPLEMENTATION                                                   //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+//                                                                  //
 //                                                                  //
 //                                                                  //
 // **************************************************************** //
+
+// **************************************************************** //
+//                                                                  //
+//                                                                  //
+// PACKET                                                           //
+//                                                                  //
+//                                                                  //
+// **************************************************************** //
+
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_INLINE packet::packet(const std::string& from, const std::string& to, const std::vector<std::string>& path, const std::string& data) : from(from), to(to), path(path), data(data)
+{
+}
+
+APRS_LIB_INLINE packet::packet(const char* packet_string) : packet(std::string(packet_string))
+{
+}
+
+APRS_LIB_INLINE packet::packet(const std::string packet_string)
+{
+    try_decode_packet(packet_string, *this);
+}
+
+APRS_LIB_INLINE packet::operator std::string() const
+{
+    return to_string(*this);
+}
+
+APRS_LIB_INLINE bool operator==(const packet& lhs, const packet& rhs)
+{
+    if (lhs.path.size() != rhs.path.size())
+    {
+        return false;
+    }
+
+    if (lhs.data.size() != rhs.data.size())
+    {
+        return false;
+    }
+
+    if (lhs.from.size() != rhs.from.size() || lhs.from != rhs.from)
+    {
+        return false;
+    }
+
+    if (lhs.to.size() != rhs.to.size() || lhs.to != rhs.to)
+    {
+        return false;
+    }
+
+    for (size_t i = 0; i < lhs.path.size() && i < rhs.path.size(); i++)
+    {
+        if (lhs.path[i].size() != rhs.path[i].size() || lhs.path[i] != rhs.path[i])
+        {
+            return false;
+        }
+    }
+
+    if (lhs.data != rhs.data)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+APRS_LIB_INLINE bool operator!=(const packet& lhs, const packet& rhs)
+{
+    return !(lhs == rhs);
+}
+
+APRS_LIB_INLINE std::string to_string(const struct packet& packet)
+{
+    // Does not guarantee formatting a correct packet string
+    // if the input packet is invalid ex: missing path
+
+    std::string result = packet.from + ">" + packet.to;
+
+    if (!packet.path.empty())
+    {
+        result += ",";
+        for (size_t i = 0; i < packet.path.size(); ++i)
+        {
+            result += packet.path[i];
+            if (i < packet.path.size() - 1) // not the last one
+            {
+                result += ",";
+            }
+        }
+    }
+
+    result += ":" + packet.data;
+
+    return result;
+}
+
+APRS_LIB_INLINE bool try_decode_packet(std::string_view packet_string, packet& result)
+{
+    // Parse a packet: N0CALL>APRS,CALLA,CALLB*,CALLC,CALLD,CALLE,CALLF,CALLG:data
+    //                 ~~~~~~ ~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~
+    //                 from   to   path                                       data
+    //
+    // If packet string is invalid, filling of the the packet fields is not guaranteed,
+    // e.g. missing data separator ":", or missig "path"
+
+    result.path.clear();
+
+    size_t from_position = packet_string.find('>');
+    size_t colon_position = packet_string.find(':', from_position);
+
+    if (from_position == std::string::npos || colon_position == std::string::npos)
+    {
+        return false;
+    }
+
+    result.from = packet_string.substr(0, from_position);
+
+    std::string_view to_and_path = packet_string.substr(from_position + 1, colon_position - from_position - 1);
+
+    size_t comma_position = to_and_path.find(',');
+
+    result.to = to_and_path.substr(0, comma_position);
+
+    if (comma_position != std::string::npos)
+    {
+        std::string_view path = to_and_path.substr(comma_position + 1);
+
+        while (!path.empty())
+        {
+            size_t next_comma = path.find(',');
+
+            std::string_view address = path.substr(0, next_comma);
+
+            result.path.push_back(std::string(address));
+
+            if (next_comma == std::string_view::npos)
+            {
+                break;
+            }
+
+            path.remove_prefix(next_comma + 1);
+        }
+    }
+
+    result.data = packet_string.substr(colon_position + 1);
+
+    return true;
+}
+
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_APRS_NAMESPACE_END
+
+// **************************************************************** //
+//                                                                  //
+//                                                                  //
+// TYPE SUPPORT                                                     //
+//                                                                  //
+//                                                                  //
+// **************************************************************** //
+
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 APRS_LIB_INLINE bool operator==(data_type first, data_type second)
 {
-    if ((int)first == (int)data_type::position)
+    if (static_cast<int>(first) == static_cast<int>(data_type::position))
     {
-        if ((int)second == (int)data_type::position_with_timestamp ||
-            (int)second == (int)data_type::position_without_timestamp ||
-            (int)second == (int)data_type::position_compressed_without_timestamp ||
-            (int)second == (int)data_type::position_compressed_with_timestamp)
+        if (static_cast<int>(second) == static_cast<int>(data_type::position_with_timestamp) ||
+            static_cast<int>(second) == static_cast<int>(data_type::position_without_timestamp) ||
+            static_cast<int>(second) == static_cast<int>(data_type::position_compressed_without_timestamp) ||
+            static_cast<int>(second) == static_cast<int>(data_type::position_compressed_with_timestamp))
         {
             return true;
         }
     }
-    else if ((int)second == (int)data_type::position)
+    else if (static_cast<int>(second) == static_cast<int>(data_type::position))
     {
-        if ((int)first == (int)data_type::position_with_timestamp ||
-            (int)first == (int)data_type::position_without_timestamp ||
-            (int)first == (int)data_type::position_compressed_without_timestamp ||
-            (int)first == (int)data_type::position_compressed_with_timestamp)
+        if (static_cast<int>(first) == static_cast<int>(data_type::position_with_timestamp) ||
+            static_cast<int>(first) == static_cast<int>(data_type::position_without_timestamp) ||
+            static_cast<int>(first) == static_cast<int>(data_type::position_compressed_without_timestamp) ||
+            static_cast<int>(first) == static_cast<int>(data_type::position_compressed_with_timestamp))
         {
             return true;
         }
     }
-    if ((int)first == (int)data_type::object)
+    if (static_cast<int>(first) == static_cast<int>(data_type::object))
     {
-        if ((int)second == (int)data_type::object_with_compressed_position ||
-            (int)second == (int)data_type::object_with_data_ext ||
-            (int)second == (int)data_type::object_without_data_ext)
+        if (static_cast<int>(second) == static_cast<int>(data_type::object_with_compressed_position) ||
+            static_cast<int>(second) == static_cast<int>(data_type::object_with_data_ext) ||
+            static_cast<int>(second) == static_cast<int>(data_type::object_without_data_ext))
         {
             return true;
         }
     }
-    else if ((int)second == (int)data_type::object)
+    else if (static_cast<int>(second) == static_cast<int>(data_type::object))
     {
-        if ((int)first == (int)data_type::object_with_compressed_position ||
-            (int)first == (int)data_type::object_with_data_ext ||
-            (int)first == (int)data_type::object_without_data_ext)
+        if (static_cast<int>(first) == static_cast<int>(data_type::object_with_compressed_position) ||
+            static_cast<int>(first) == static_cast<int>(data_type::object_with_data_ext) ||
+            static_cast<int>(first) == static_cast<int>(data_type::object_without_data_ext))
         {
             return true;
         }
     }
-    return (int)first == (int)second;
-}
-
-APRS_LIB_INLINE std::string to_string(const packet& packet)
-{
-    std::string result = packet.source_address + ">" + packet.destination_address;
-    for (const auto& a : packet.path)
-        result += "," + a;
-    result += ":" + packet.data;
-    return result;
+    return static_cast<int>(first) == static_cast<int>(second);
 }
 
 APRS_LIB_INLINE std::string to_string(const data_type& t)
 {
+APRS_LIB_APRS_NAMESPACE_USE
+
     switch (t)
     {
-        case aprs::data_type::position_with_timestamp:
+        case data_type::position_with_timestamp:
             return "position_with_timestamp";
-        case aprs::data_type::position_without_timestamp:
+        case data_type::position_without_timestamp:
             return "position_without_timestamp";
-        case aprs::data_type::position_compressed_with_timestamp:
+        case data_type::position_compressed_with_timestamp:
             return "position_compressed_with_timestamp";
-        case aprs::data_type::position_compressed_without_timestamp:
+        case data_type::position_compressed_without_timestamp:
             return "position_compressed_without_timestamp";
-        case aprs::data_type::item_with_compressed_position:
+        case data_type::item_with_compressed_position:
             return "item_with_compressed_position";
-        case aprs::data_type::position:
+        case data_type::position:
             return "position";
-        case aprs::data_type::item:
+        case data_type::item:
             return "item";
-        case aprs::data_type::object_with_data_ext:
+        case data_type::object_with_data_ext:
             return "object_with_data_ext";
-        case aprs::data_type::object_without_data_ext:
+        case data_type::object_without_data_ext:
             return "object_without_data_ext";
-        case aprs::data_type::object_with_compressed_position:
+        case data_type::object_with_compressed_position:
             return "object_with_compressed_position";
-        case aprs::data_type::object:
+        case data_type::object:
             return "object";
-        case aprs::data_type::message_ack:
+        case data_type::message_ack:
             return "message_ack";
-        case aprs::data_type::message:
+        case data_type::message:
             return "message";
-        case aprs::data_type::mic_e_with_telemetry:
+        case data_type::mic_e_with_telemetry:
             return "mic_e_with_telemetry";
-        case aprs::data_type::mic_e:
+        case data_type::mic_e:
             return "mic_e";
-        case aprs::data_type::bulletin:
+        case data_type::bulletin:
             return "bulletin";
-        case aprs::data_type::user_defined:
+        case data_type::user_defined:
             return "user_defined";
-        case aprs::data_type::test_data:
+        case data_type::test_data:
             return "test_data";
         default:
             break;
@@ -1004,18 +1487,248 @@ APRS_LIB_INLINE bool try_parse_symbol(const std::string& symbol_name, symbol& sy
     return APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE symbol_map::instance().try_get_symbol_by_name(symbol_name, symbol);
 }
 
-template <APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE PacketWithSymbolSpec P>
-APRS_LIB_INLINE bool try_parse_symbol(const P& data, symbol& symbol, symbol_overlay& symbol_overlay)
+template <APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE SymbolSpec S>
+APRS_LIB_INLINE bool try_parse_symbol(const S& s, symbol& symbol, symbol_overlay& symbol_overlay)
 {
-     return false;
+    return APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE try_parse_symbol(s.symbol_table, s.symbol_code, symbol, symbol_overlay);
 }
 
 APRS_LIB_INLINE bool try_parse_symbol(char symbol_table, char symbol_code, symbol& symbol, symbol_overlay& symbol_overlay)
 {
-    return false;
+    return APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE try_parse_symbol(symbol_table, symbol_code, symbol, symbol_overlay);
 }
 
-#endif
+#endif // APRS_LIB_SYMBOL_INFO
+
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_APRS_NAMESPACE_END
+
+// **************************************************************** //
+//                                                                  //
+//                                                                  //
+// ADDRESS                                                          //
+//                                                                  //
+//                                                                  //
+// **************************************************************** //
+
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
+APRS_LIB_APRS_CORE_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_INLINE std::string to_string(const struct address& address)
+{
+    if (address.text.empty())
+    {
+        return "";
+    }
+
+    std::string result = address.text;
+
+    if (address.n > 0)
+    {
+        result += std::to_string(address.n);
+    }
+
+    if (address.N > 0)
+    {
+        result += "-" + std::to_string(address.N);
+    }
+
+    if (address.mark)
+    {
+        result += "*";
+    }
+
+    return result;
+}
+
+APRS_LIB_INLINE q_construct parse_q_construct(const std::string& text)
+{
+    static const std::unordered_map<std::string, q_construct> lookup_table =
+    {
+        { "qAC", q_construct::qAC },
+        { "qAX", q_construct::qAX },
+        { "qAU", q_construct::qAU },
+        { "qAo", q_construct::qAo },
+        { "qAO", q_construct::qAO },
+        { "qAS", q_construct::qAS },
+        { "qAr", q_construct::qAr },
+        { "qAR", q_construct::qAR },
+        { "qAZ", q_construct::qAZ },
+        { "qAI", q_construct::qAI }
+    };
+
+    if (auto it = lookup_table.find(text); it != lookup_table.end())
+    {
+        return it->second;
+    }
+
+    return q_construct::none;
+}
+
+APRS_LIB_INLINE address_kind parse_address_kind(const std::string& text)
+{
+    static const std::unordered_map<std::string, address_kind> lookup_table =
+    {
+        { "WIDE", address_kind::wide },
+        { "TRACE", address_kind::trace },
+        { "RELAY", address_kind::relay },
+        { "ECHO", address_kind::echo },
+        { "GATE", address_kind::gate },
+        { "TEMP", address_kind::temp },
+        { "TCPIP", address_kind::tcpip },
+        { "TCPXX", address_kind::tcpxx },
+        { "NOGATE", address_kind::nogate },
+        { "RFONLY", address_kind::rfonly },
+        { "IGATECALL", address_kind::igatecall },
+        { "OPNTRK", address_kind::opntrk },
+        { "OPNTRC", address_kind::opntrc }
+    };
+
+    if (auto it = lookup_table.find(text); it != lookup_table.end())
+    {
+        return it->second;
+    }
+
+    return address_kind::other;
+}
+
+APRS_LIB_INLINE bool try_parse_address(std::string_view address_string, struct address& address)
+{
+    address.text = address_string;
+    address.mark = false;
+    address.ssid = 0;
+    address.length = address_string.size();
+
+    q_construct q = parse_q_construct(address.text);
+
+    address.q = q;
+
+    if (q != q_construct::none)
+    {
+        address.n = 0;
+        address.N = 0;
+        address.kind = address_kind::q;
+    }
+    else
+    {
+        if (!address_string.empty() && address_string.back() == '*')
+        {
+            address.mark = true;
+            address_string.remove_suffix(1);
+            address.text = address_string;
+            address.N = 0;
+            address.n = 0;
+        }
+
+        auto sep_position = address_string.find("-");
+
+        if (sep_position != std::string::npos)
+        {
+            // Check if there are digits before and after the dash
+            if (sep_position > 0 && isdigit(address_string[sep_position - 1]) && (sep_position + 1) < address_string.size() && isdigit(address_string[sep_position + 1]))
+            {
+                // Ensure only one digit after the dash
+                if (sep_position + 2 == address_string.size())
+                {
+                    // Left of the dash + digit
+                    address.text = address_string.substr(0, sep_position - 1);
+
+                    // Parse the n value (digit before the dash)
+                    address.n = address_string[sep_position - 1] - '0'; // Convert char to int
+
+                    // Parse the N value (digit after the dash)
+                    address.N = address_string[sep_position + 1] - '0'; // Convert char to int
+
+                    // Ensure valid range 1 - 7
+                    if (address.N <= 0 || address.N > 7 || address.n <= 0 || address.n > 7)
+                    {
+                        address.N = 0;
+                        address.n = 0;
+                        address.text = address_string;
+                    }
+                }
+            }
+            // Handle parsing of a callsign SSID
+            else if ((sep_position + 1) < address_string.size() && isdigit(address_string[sep_position + 1]))
+            {
+                address.text = address_string;
+                address.N = 0;
+                address.n = 0;
+
+                std::string ssid_str = std::string(address_string.substr(sep_position + 1));
+
+                if (ssid_str.size() == 1 || (ssid_str.size() == 2 && std::isdigit(ssid_str[1])))
+                {
+                    address.ssid = atoi(ssid_str.c_str());
+                }
+            }
+        }
+        else // If there's no '-', assume only text or text followed by a single digit
+        {
+            address.text = address_string;
+
+            // Check for trailing digit without '-'
+            if (!address_string.empty() && isdigit(address_string.back()))
+            {
+                address.n = address_string.back() - '0'; // Last digit is n
+                address_string.remove_suffix(1);   // Remove the digit from the text
+                address.text = address_string;
+
+                if (address.n <= 0 || address.n > 7)
+                {
+                    address.n = 0;
+                    address.text = address_string;
+                }
+            }
+            else
+            {
+                address.n = 0; // No digit found, default n to 0
+            }
+
+            address.N = 0; // No N specified, default to 0
+        }
+
+        address.kind = parse_address_kind(address.text);
+    }
+
+    // Never fail. Failure to parse a address means that n-N will not be set.
+    return true;
+}
+
+APRS_LIB_INLINE address::address(const char* address_string)
+{
+    try_parse_address(address_string, *this);
+}
+
+APRS_LIB_INLINE address::address(const std::string address_string)
+{
+    try_parse_address(address_string, *this);
+}
+
+APRS_LIB_INLINE bool address::operator==(const address& rhs) const
+{
+    return to_string(*this) == to_string(rhs);
+}
+
+APRS_LIB_INLINE bool address::operator!=(const address& rhs) const
+{
+    return !(*this == rhs);
+}
+
+APRS_LIB_INLINE address::operator std::string() const
+{
+    return to_string(*this);
+}
+
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_APRS_NAMESPACE_END
+
+APRS_LIB_APRS_CORE_NAMESPACE_END
 
 // **************************************************************** //
 //                                                                  //
@@ -1024,6 +1737,10 @@ APRS_LIB_INLINE bool try_parse_symbol(char symbol_table, char symbol_code, symbo
 //                                                                  //
 //                                                                  //
 // **************************************************************** //
+
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 APRS_LIB_INLINE data_type get_data_type(std::string_view data)
 {
@@ -1090,14 +1807,14 @@ APRS_LIB_INLINE data_type get_data_type(std::string_view data)
     return data_type::unknown;
 }
 
-template <APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE PacketSpec T>
-APRS_LIB_INLINE data_type get_packet_type(const T& packet)
+template <APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE PacketSpec P>
+APRS_LIB_INLINE data_type get_data_type(const P& packet)
 {
-    return get_data_type(packet.data);
+    return get_data_type(std::string_view(packet.data));
 }
 
 template <APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE IsAnyOf<position, object, item, message> T>
-APRS_LIB_INLINE bool try_decode_data_as(std::string_view data, T& packet)
+APRS_LIB_INLINE bool try_decode_data_as(std::string_view data, T& t)
 {
     //
     // Message types:
@@ -1120,44 +1837,44 @@ APRS_LIB_INLINE bool try_decode_data_as(std::string_view data, T& packet)
     {
         if (message_type == data_type::position_without_timestamp)    
         {
-            return APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE try_parse_position_without_timestamp(data, packet);
+            return APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE try_parse_position_without_timestamp(data, t);
         }
         if (message_type == data_type::position_compressed_without_timestamp)    
         {
-            return APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE try_parse_compressed_position_without_timestamp(data, packet);
+            return APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE try_parse_compressed_position_without_timestamp(data, t);
         }
         else if (message_type == data_type::position_with_timestamp)
         {
-            return APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE try_parse_position_with_timestamp(data, packet);
+            return APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE try_parse_position_with_timestamp(data, t);
         }
         else if (message_type == data_type::position_compressed_with_timestamp)
         {
-            return APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE try_parse_compressed_position_with_timestamp(data, packet);
+            return APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE try_parse_compressed_position_with_timestamp(data, t);
         }
     }
     else if constexpr (std::is_same_v<T, object>)
     {       
         if (message_type == data_type::object_with_compressed_position)
         {
-            return APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE try_parse_object_with_compressed_position(data, packet);
+            return APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE try_parse_object_with_compressed_position(data, t);
         }
         else if (message_type == data_type::object)
         {
-            return APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE try_parse_object_without_data_ext(data, packet);
+            return APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE try_parse_object_without_data_ext(data, t);
         }
     }
     else if constexpr (std::is_same_v<T, message>)
     {
         if (message_type == data_type::message)
         {
-            return APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE try_parse_message(data, packet);
+            return APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE try_parse_message(data, t);
         }
     }
     else if constexpr (std::is_same_v<T, item>)
     {
         if (message_type == data_type::item)
         {
-            return APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE try_parse_item(data, packet);
+            return APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE try_parse_item(data, t);
         }
     }
 
@@ -1165,7 +1882,7 @@ APRS_LIB_INLINE bool try_decode_data_as(std::string_view data, T& packet)
 }
 
 template <APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE IsAnyOf<position, object, item, message, mic_e> T>
-APRS_LIB_INLINE bool try_decode_data_as(std::string_view destination_address, std::string_view data, T& packet)
+APRS_LIB_INLINE bool try_decode_data_as(std::string_view destination_address, std::string_view data, T& t)
 {
     data_type message_type = get_data_type(data);
 
@@ -1174,24 +1891,28 @@ APRS_LIB_INLINE bool try_decode_data_as(std::string_view destination_address, st
                   std::is_same_v<T, message> ||
                   std::is_same_v<T, item>)
     {
-        return try_decode_data_as(data, packet);
+        return try_decode_data_as(data, t);
     }
     if constexpr (std::is_same_v<T, mic_e>)
     {
         if (message_type == data_type::mic_e)
         {
-            return APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE try_parse_mic_e(destination_address, data, packet);
+            return APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE try_parse_mic_e(destination_address, data, t);
         }
     }
 
     return false;
 }
 
-template <APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE PacketSpec P, APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE IsAnyOf<position, object, item, message, mic_e> T>
-APRS_LIB_INLINE bool try_decode_packet_as(const P& packet, T& data)
+template <APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE IsAnyOf<position, object, item, message, mic_e> T>
+APRS_LIB_INLINE bool try_decode_packet_as(const struct packet& packet, T& t)
 {
-    return try_decode_data_as(packet.destination_address, packet.data, data);
+    return try_decode_data_as(packet.to, packet.data, t);
 }
+
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_APRS_NAMESPACE_END
 
 // **************************************************************** //
 //                                                                  //
@@ -1211,7 +1932,11 @@ APRS_LIB_INLINE bool try_decode_packet_as(const P& packet, T& data)
 //                                                                  //
 // **************************************************************** //
 
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
 APRS_LIB_APRS_DETAIL_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 template <APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE PositionSpec T>
 APRS_LIB_INLINE bool try_parse_compressed_coordinates(std::string_view pos_str, T& t_with_position)
@@ -1483,19 +2208,29 @@ APRS_LIB_INLINE bool try_parse_mic_e_altitude(std::string_view alt_str, float& a
     return true;
 }
 
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_APRS_NAMESPACE_END
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_END
+
 // **************************************************************** //
 //                                                                  //
 // UTILS                                                            //
 //                                                                  //
 // **************************************************************** //
 
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
 APRS_LIB_INLINE bool try_parse_number(std::string_view number_str, int& number)
 {
     auto [ptr, ec] = std::from_chars(number_str.data(), number_str.data() + number_str.size(), number);
     return ec == std::errc();
 };
-
-#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 APRS_LIB_INLINE std::string trim(const std::string& str)
 {
@@ -1508,17 +2243,32 @@ APRS_LIB_INLINE std::string trim(const std::string& str)
     return str.substr(first, last - first + 1);
 }
 
-#endif
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_APRS_NAMESPACE_END
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_END
 
 // **************************************************************** //
 //                                                                  //
-// TIME PARSING                                                     //
+// TIMESTAMP PARSING                                                //
 //                                                                  //
 // **************************************************************** //
+
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 template <APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE DateTimeSpec T>
 APRS_LIB_INLINE bool try_parse_timestamp(std::string_view timestamp, T& t_with_datetime)
 {
+    if (timestamp.size() != 7)
+    {
+        return false;
+    }
+
     int day_or_hour;
     int hour_or_minute;
     int minute_or_second; 
@@ -1536,6 +2286,7 @@ APRS_LIB_INLINE bool try_parse_timestamp(std::string_view timestamp, T& t_with_d
     auto dp_utc = floor<days>(tp_utc);    
     auto tp_local = zoned_time{current_zone(), system_clock::now()}.get_local_time();
     auto dp_local = floor<days>(tp_local);
+
     year_month_day local_date{dp_local};
     year_month_day utc_date{dp_utc};
     
@@ -1549,24 +2300,24 @@ APRS_LIB_INLINE bool try_parse_timestamp(std::string_view timestamp, T& t_with_d
 
     if (timestamp[6] == 'z')
     {
-        t_with_datetime.date_year = (int)utc_date.year();
-        t_with_datetime.date_month = (int)(unsigned)utc_date.month();
+        t_with_datetime.date_year = int(utc_date.year());
+        t_with_datetime.date_month = unsigned(utc_date.month());
         t_with_datetime.date_day = day_or_hour;        
         t_with_datetime.date_time_hour = hour_or_minute;        
         t_with_datetime.date_time_minute = minute_or_second;
     }
     else if (timestamp[6] == 'h')
     {
-        t_with_datetime.date_year = (int)utc_date.year();
-        t_with_datetime.date_month = (int)(unsigned)utc_date.month();
-        t_with_datetime.date_day = (int)(unsigned)utc_date.day();        
+        t_with_datetime.date_year = int(utc_date.year());
+        t_with_datetime.date_month = unsigned(utc_date.month());
+        t_with_datetime.date_day = unsigned(utc_date.day());        
         t_with_datetime.date_time_hour = day_or_hour;
         t_with_datetime.date_time_minute = hour_or_minute;
     }
     else if (timestamp[6] == '/')
     {
-        t_with_datetime.date_year = (int)local_date.year();
-        t_with_datetime.date_month = (int)(unsigned)local_date.month();
+        t_with_datetime.date_year = int(local_date.year());
+        t_with_datetime.date_month = unsigned(local_date.month());
         t_with_datetime.date_day = day_or_hour;        
         t_with_datetime.date_time_hour = hour_or_minute; 
         t_with_datetime.date_time_minute = minute_or_second;
@@ -1579,11 +2330,23 @@ APRS_LIB_INLINE bool try_parse_timestamp(std::string_view timestamp, T& t_with_d
     return true;
 }
 
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_APRS_NAMESPACE_END
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_END
+
 // **************************************************************** //
 //                                                                  //
 // HELPERS                                                          //
 //                                                                  //
 // **************************************************************** //
+
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 APRS_LIB_INLINE void parse_data_ext(std::string_view data)
 {
@@ -1633,7 +2396,11 @@ APRS_LIB_INLINE bool try_parse_item_state(char state_ch, item_state& state)
     return false;
 }
 
-APRS_LIB_NAMESPACE_END
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_APRS_NAMESPACE_END
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_END
 
 // **************************************************************** //
 //                                                                  //
@@ -1649,7 +2416,11 @@ APRS_LIB_NAMESPACE_END
 //                                                                  //
 // **************************************************************** //
 
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
 APRS_LIB_APRS_CORE_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 APRS_LIB_INLINE bool try_parse_position_without_timestamp(std::string_view data, position& position)
 {
@@ -2130,10 +2901,9 @@ APRS_LIB_INLINE bool try_parse_item_with_compressed_position(std::string_view da
     return true;
 }
 
-template <APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE PacketSpec P>
-APRS_LIB_INLINE bool try_parse_mic_e(const P& packet, mic_e& mic_e)
+APRS_LIB_INLINE bool try_parse_mic_e(const struct packet& packet, mic_e& mic_e)
 {
-    return try_parse_mic_e(packet.destination_address, packet.data, mic_e);
+    return try_parse_mic_e(packet.to, packet.data, mic_e);
 }
 
 APRS_LIB_INLINE bool try_parse_mic_e(std::string_view destination_address, std::string_view data, mic_e& mic_e)
@@ -2168,7 +2938,6 @@ APRS_LIB_INLINE bool try_parse_mic_e(std::string_view destination_address, std::
 
     return true;
 }
-
 
 APRS_LIB_INLINE bool try_parse_bulletin(std::string_view data, bulletin& bulletin)
 {
@@ -2300,9 +3069,31 @@ APRS_LIB_INLINE bool try_parse_test_data(std::string_view data, test_data& test_
     return true;
 }
 
-APRS_LIB_NAMESPACE_END
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_APRS_NAMESPACE_END
+
+APRS_LIB_APRS_CORE_NAMESPACE_END
+
+// **************************************************************** //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+// DETAIL DATA PARSING                                              //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+// **************************************************************** //
+
+APRS_LIB_APRS_NAMESPACE_BEGIN
 
 APRS_LIB_APRS_DETAIL_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 APRS_LIB_INLINE bool try_get_mic_e_has_telemetry(std::string_view data, bool& has_telemetry)
 {
@@ -2610,6 +3401,12 @@ APRS_LIB_INLINE void parse_compression_type(const char t, compression_origin& co
     parse_compression_type(t, (int&)compression_origin, (int&)nmea_source, old_or_current);
 }
 
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_APRS_NAMESPACE_END
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_END
+
 // **************************************************************** //
 //                                                                  //
 //                                                                  //
@@ -2619,6 +3416,31 @@ APRS_LIB_INLINE void parse_compression_type(const char t, compression_origin& co
 //                                                                  //
 //                                                                  //
 // **************************************************************** //
+
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_INLINE bool try_parse_symbol(char symbol_table, char symbol_code, symbol& symbol_, symbol_overlay& symbol_overlay_)
+{
+    symbol_ = symbol::no_symbol;
+    symbol_overlay_ = symbol_overlay::none;
+
+    if (is_overlayable_symbol(symbol_code) && is_symbol_overlayable_with_uncompressed_overlay(symbol_table))
+    {
+        return try_parse_overlayable_uncompressed_symbol(symbol_table, symbol_code, symbol_, symbol_overlay_);
+    }
+    else if (is_overlayable_symbol(symbol_code) && is_symbol_overlayable_with_compressed_overlay(symbol_table))
+    {
+        return try_parse_overlayable_compressed_symbol(symbol_table, symbol_code, symbol_, symbol_overlay_);
+    }
+    else
+    {
+        return try_parse_symbol_no_overlay(symbol_table, symbol_code, symbol_);
+    }
+}
 
 APRS_LIB_INLINE bool try_parse_uncompressed_symbol(char symbol_table, char symbol_code, symbol& symbol_, symbol_overlay& symbol_overlay_)
 {
@@ -2717,6 +3539,12 @@ APRS_LIB_INLINE bool try_parse_compressed_symbol_overlay(char symbol_table, symb
     return (symbol_table >= 'A' && symbol_table <= 'Z') || (symbol_table >= 'a' && symbol_table <= 'j');
 }
 
+// **************************************************************** //
+//                                                                  //
+// SYMBOL INFO                                                      //
+//                                                                  //
+// **************************************************************** //
+
 APRS_LIB_INLINE bool symbol_map::try_get_symbol_by_destination_address(std::string destination_address, symbol& symbol)
 {
     if (destination_address_map.count(destination_address) == 1)
@@ -2752,14 +3580,14 @@ APRS_LIB_INLINE bool symbol_map::try_get_symbol_by_name(const std::string& name,
 APRS_LIB_INLINE symbol_info& symbol_map::get_symbol_info(symbol symbol)
 { 
     size_t index = (size_t)symbol;
-    if (index < 0 || index >= symbols.size())
+    if (index >= symbols.size())
     {
         return no_symbol;
     }
     return symbols[index];
 }
 
-#endif
+#endif // APRS_LIB_SYMBOL_INFO
 
 APRS_LIB_INLINE void symbol_map::populate()
 {
@@ -2935,7 +3763,7 @@ APRS_LIB_INLINE void symbol_map::populate()
     symbols.push_back({ 88, "skywarn", "Skywarn", 'y', '\\', true, "SY", -1 });
     symbols.push_back({ 89, "shelter2", "Shelter", 'z', '\\', true, "SZ", -1 });
     symbols.push_back({ 90, "fog", "Fog", '{', '\\', true, "Q1", -1 });
-#endif
+#endif // APRS_LIB_SYMBOL_INFO
 
     destination_address_map["BB"] = 0;
     destination_address_map["BD"] = 1;
@@ -3428,17 +4256,37 @@ APRS_LIB_INLINE void symbol_map::populate()
     symbol_name_map["fog"] = 163;
 }
 
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+APRS_LIB_APRS_NAMESPACE_END
+
 APRS_LIB_APRS_DETAIL_NAMESPACE_END
 
 // **************************************************************** //
 //                                                                  //
 //                                                                  //
+//                                                                  //
+//                                                                  //
+//                                                                  //
 // CORE QUERIES                                                     //
+//                                                                  //
+//                                                                  //
+//                                                                  //
 //                                                                  //
 //                                                                  //
 // **************************************************************** //
 
+APRS_LIB_APRS_NAMESPACE_BEGIN
+
 APRS_LIB_APRS_DETAIL_NAMESPACE_BEGIN
+
+#ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
+// **************************************************************** //
+//                                                                  //
+// MISC                                                             //
+//                                                                  //
+// **************************************************************** //
 
 APRS_LIB_INLINE bool try_get_position_with_timestamp_is_compressed(std::string_view data, bool& compressed)
 {
@@ -3475,7 +4323,9 @@ APRS_LIB_INLINE bool try_get_mic_e_is_kenwood_tmd700(std::string_view data, bool
 }
 
 // **************************************************************** //
+//                                                                  //
 // SYMBOLS                                                          //
+//                                                                  //
 // **************************************************************** //
 
 APRS_LIB_INLINE bool is_supported_pri_table_symbol(char symbol_code)
@@ -3580,31 +4430,40 @@ APRS_LIB_INLINE bool is_symbol_overlayable_with_compressed_overlay(char symbol_t
         (symbol_table >= 'A' && symbol_table <= 'Z');
 }
 
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
+
 APRS_LIB_APRS_DETAIL_NAMESPACE_END
 
-APRS_LIB_NAMESPACE_END
-
-APRS_LIB_KISS_NAMESPACE_BEGIN
+APRS_LIB_APRS_NAMESPACE_END
 
 // **************************************************************** //
+//                                                                  //
+//                                                                  //
 //                                                                  //
 //                                                                  //
 // KISS                                                             //
 //                                                                  //
 //                                                                  //
+//                                                                  //
+//                                                                  //
 // **************************************************************** //
 
 // **************************************************************** //
 //                                                                  //
-// FORWARD DECLARATIONS                                             //
+//                                                                  //
+// TYPES                                                            //
+//                                                                  //
 //                                                                  //
 // **************************************************************** //
+
+APRS_LIB_KISS_NAMESPACE_BEGIN
 
 struct kiss_frame_decoder
 {
     const std::vector<std::string>& data();
-    int count();
+    size_t count();
     bool decode(std::string_view);
+    void reset();
     void clear();
 
 private:
@@ -3615,6 +4474,10 @@ private:
     bool in_escape_mode = false;
     bool skip_command_byte = true;
 };
+
+APRS_LIB_KISS_NAMESPACE_END
+
+APRS_LIB_KISS_NAMESPACE_BEGIN
 
 APRS_LIB_APRS_DETAIL_NAMESPACE_BEGIN
 
@@ -3638,11 +4501,33 @@ enum class kiss_command : uint8_t
     ret = 0xff
 };
 
+APRS_LIB_APRS_DETAIL_NAMESPACE_END
+
+APRS_LIB_KISS_NAMESPACE_END
+
 // **************************************************************** //
 //                                                                  //
-// TYPE IMPLEMENTATION                                              //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+// IMPLEMENTATION                                                   //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+//                                                                  //
 //                                                                  //
 // **************************************************************** //
+
+// **************************************************************** //
+//                                                                  //
+// TYPE SUPPORT                                                     //
+//                                                                  //
+// **************************************************************** //
+
+APRS_LIB_KISS_NAMESPACE_BEGIN
+
+APRS_LIB_APRS_DETAIL_NAMESPACE_BEGIN
 
 #ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
@@ -3651,9 +4536,19 @@ APRS_LIB_INLINE bool operator==(uint8_t left, kiss_frame_marker right)
     return left == (uint8_t)right;
 }
 
-#endif
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 APRS_LIB_APRS_DETAIL_NAMESPACE_END
+
+APRS_LIB_KISS_NAMESPACE_END
+
+// **************************************************************** //
+//                                                                  //
+// TYPE IMPLEMENTATION                                              //
+//                                                                  //
+// **************************************************************** //
+
+APRS_LIB_KISS_NAMESPACE_BEGIN
 
 #ifndef APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
@@ -3662,12 +4557,12 @@ APRS_LIB_INLINE const std::vector<std::string>& kiss_frame_decoder::data()
     return data_;
 }
 
-APRS_LIB_INLINE int kiss_frame_decoder::count()
+APRS_LIB_INLINE size_t kiss_frame_decoder::count()
 {
-    return (int)data_.size();
+    return data_.size();
 }
 
-APRS_LIB_INLINE void kiss_frame_decoder::clear()
+APRS_LIB_INLINE void kiss_frame_decoder::reset()
 {
     data_.clear();
     buffer.clear();
@@ -3677,19 +4572,29 @@ APRS_LIB_INLINE void kiss_frame_decoder::clear()
     skip_command_byte = true;
 }
 
+APRS_LIB_INLINE void kiss_frame_decoder::clear()
+{
+    data_.clear();
+}
+
 APRS_LIB_INLINE bool kiss_frame_decoder::decode(std::string_view chunk)
 {
     // 
     // KISS frame structure:
     //
-	// --------------------------------------------------------------------
-	// Frame End (FEND)   1 byte (0xc0)  <------------ frame begin  <------------ frame 1
-	// data                                                               |
-	// Frame End (FEND)   1 byte (0xc0)  <------------ frame end    <-----
-    // Frame End (FEND)   1 byte (0xc0)  <------------ frame begin  <------------ frame 2
-    // data                                                               |
-    // Frame End (FEND)   1 byte (0xc0)  <------------ frame end    <-----
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // Frame End (FEND)   1 byte (0xc0)  <------------ frame begin          | <------------ frame 1
+    // -------------------------------------------------------------------- |
+    // data                                                                 |
+    // -------------------------------------------------------------------- |
+    // Frame End (FEND)   1 byte (0xc0)  <------------ frame end            |
+    // --------------------------------------------------------------------
+    // Frame End (FEND)   1 byte (0xc0)  <------------ frame begin          | <------------ frame 2
+    // -------------------------------------------------------------------- |
+    // data                                                                 |          
+    // -------------------------------------------------------------------- |
+    // Frame End (FEND)   1 byte (0xc0)  <------------ frame end            |
+    // --------------------------------------------------------------------
     //
     //
     //
@@ -3704,7 +4609,7 @@ APRS_LIB_INLINE bool kiss_frame_decoder::decode(std::string_view chunk)
     // 
     // --------------------------------------------------------------------
     // Frame End (FEND)   1 byte (0xc0)  <------------ frame begin
-	// data
+    // data
     // ...
     // 0xDB   <--------------------------------------- frame escape, escapes the next 1 byte, giving it special meaning   ------- |  0xc0
     // 0xDC   <--------------------------------------- insert the 0xc0 byte in the data stream  --------------------------------- |
@@ -3713,7 +4618,7 @@ APRS_LIB_INLINE bool kiss_frame_decoder::decode(std::string_view chunk)
     // ...
     // 0xDC   <--------------------------------------- just a normal 0xDC byte
     // ....
-	// Frame End (FEND)   1 byte (0xc0)  <------------ frame end
+    // Frame End (FEND)   1 byte (0xc0)  <------------ frame end
     // --------------------------------------------------------------------
     //
     //
@@ -3750,26 +4655,26 @@ APRS_LIB_INLINE bool kiss_frame_decoder::decode(std::string_view chunk)
         {
             if (in_escape_mode)
             {
-                if (b == APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE kiss_frame_marker::tfend)
+                if (b == APRS_LIB_KISS_DETAIL_NAMESPACE_REFERENCE kiss_frame_marker::tfend)
                 {
-                    current_data.push_back((char)APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE kiss_frame_marker::fend);
+                    current_data.push_back((char)APRS_LIB_KISS_DETAIL_NAMESPACE_REFERENCE kiss_frame_marker::fend);
                 }
-                if (b == APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE kiss_frame_marker::tfesc)
+                if (b == APRS_LIB_KISS_DETAIL_NAMESPACE_REFERENCE kiss_frame_marker::tfesc)
                 {
-                    current_data.push_back((char)APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE kiss_frame_marker::fesc);
+                    current_data.push_back((char)APRS_LIB_KISS_DETAIL_NAMESPACE_REFERENCE kiss_frame_marker::fesc);
                 }
                 in_escape_mode = false;
                 continue;
             }
             
-            if (b == APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE kiss_frame_marker::fend)
+            if (b == APRS_LIB_KISS_DETAIL_NAMESPACE_REFERENCE kiss_frame_marker::fend)
             {
                 data_.push_back(current_data);
                 current_data.clear();
                 in_kiss_frame = false;
                 skip_command_byte = true;
             }
-            else if (b == APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE kiss_frame_marker::fesc)
+            else if (b == APRS_LIB_KISS_DETAIL_NAMESPACE_REFERENCE kiss_frame_marker::fesc)
             {
                 in_escape_mode = true;
             }
@@ -3786,7 +4691,7 @@ APRS_LIB_INLINE bool kiss_frame_decoder::decode(std::string_view chunk)
         }
         else
         {
-            if (b == APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE kiss_frame_marker::fend)
+            if (b == APRS_LIB_KISS_DETAIL_NAMESPACE_REFERENCE kiss_frame_marker::fend)
             {
                 in_kiss_frame = true;
             }
@@ -3797,9 +4702,21 @@ APRS_LIB_INLINE bool kiss_frame_decoder::decode(std::string_view chunk)
     return (current_data_count < data_.size()) && buffer.empty() && !in_kiss_frame;
 }
 
-#endif
+#endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 APRS_LIB_KISS_NAMESPACE_END
+
+// **************************************************************** //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+// AX.25                                                            //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+//                                                                  //
+// **************************************************************** //
 
 APRS_LIB_AX25_NAMESPACE_BEGIN
 
@@ -3830,11 +4747,9 @@ enum class protocol_id
 
 struct frame
 {
-    std::string source_address;
-    int source_address_ssid = 0;
-    std::string destination_address;
-    int destination_address_ssid = 0;
-    std::vector<std::pair<std::string, int>> digipeater_addresses;    
+    APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE address source_address;
+    APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE address destination_address;
+    std::vector<APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE address> digipeater_addresses;    
     std::string info_field;
 };
 
@@ -3855,7 +4770,7 @@ enum class frame_type : uint8_t
 
 APRS_LIB_INLINE decoder_hint operator&(decoder_hint a, decoder_hint b)
 {
-    return (decoder_hint)((uint8_t)a & (uint8_t)b);
+    return static_cast<decoder_hint>(static_cast<uint8_t>(a) & static_cast<uint8_t>(b));
 }
 
 APRS_LIB_INLINE bool try_decode_frame(std::string_view data, frame& frame, decoder_hint hint = decoder_hint::no_flag_no_fcs);
@@ -3866,8 +4781,9 @@ APRS_LIB_INLINE bool try_decode_ui_frame(std::string_view data, frame& frame, de
 
 APRS_LIB_INLINE int ax25_flag = 0x7e;
 
-APRS_LIB_INLINE void parse_address(std::string_view data, std::string& address, int& ssid);
-APRS_LIB_INLINE void parse_addresses(std::string_view data, std::vector<std::pair<std::string, int>>& addresses);
+APRS_LIB_INLINE void parse_address(std::string_view data, std::string& address, int& ssid, bool& mark);
+APRS_LIB_INLINE void parse_address(std::string_view data, APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE address& address_);
+APRS_LIB_INLINE void parse_addresses(std::string_view data, std::vector<APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE address>& addresses);
 
 APRS_LIB_AX25_DETAIL_NAMESPACE_END
 
@@ -3956,8 +4872,8 @@ APRS_LIB_INLINE bool try_decode_ui_frame(std::string_view data, frame& frame, de
 
     std::string_view info_field = data.substr(info_field_start, info_field_length);
 
-    APRS_LIB_AX25_DETAIL_NAMESPACE_REFERENCE parse_address(destination_address, frame.destination_address, frame.destination_address_ssid);
-    APRS_LIB_AX25_DETAIL_NAMESPACE_REFERENCE parse_address(source_address, frame.source_address, frame.source_address_ssid);
+    APRS_LIB_AX25_DETAIL_NAMESPACE_REFERENCE parse_address(destination_address, frame.destination_address);
+    APRS_LIB_AX25_DETAIL_NAMESPACE_REFERENCE parse_address(source_address, frame.source_address);
     APRS_LIB_AX25_DETAIL_NAMESPACE_REFERENCE parse_addresses(digipeater_addresses, frame.digipeater_addresses);
 
     frame.info_field = info_field;
@@ -3965,7 +4881,7 @@ APRS_LIB_INLINE bool try_decode_ui_frame(std::string_view data, frame& frame, de
     return true;
 }
 
-APRS_LIB_INLINE void parse_address(std::string_view data, std::string& address, int& ssid)
+APRS_LIB_INLINE void parse_address(std::string_view data, std::string& address, int& ssid, bool& mark)
 {
     address = std::string(6, '\0'); // addresses are 6 characters long
 
@@ -3976,17 +4892,31 @@ APRS_LIB_INLINE void parse_address(std::string_view data, std::string& address, 
     
     ssid = (data[6] >> 1) & 0xf; // 0b00001111
 
-    address = APRS_LIB_APRS_NAMESPACE :: APRS_LIB_APRS_DETAIL_NAMESPACE :: trim(address);
+    mark = (data[6] & 0b10000000) != 0; // 0x80 masks for the H bit in the last byte
+
+    address = APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE trim(address);
 }
 
-APRS_LIB_INLINE void parse_addresses(std::string_view data, std::vector<std::pair<std::string, int>>& addresses)
+APRS_LIB_INLINE void parse_address(std::string_view data, APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE address& address_)
 {
-    for (size_t i = 0; i < data.size(); i+=7)
+    std::string address;
+    int ssid = 0;
+    bool mark = false;
+
+    parse_address(data, address, ssid, mark);
+
+    address_.text = address;
+    address_.ssid = ssid;
+    address_.mark = mark;
+}
+
+APRS_LIB_INLINE void parse_addresses(std::string_view data, std::vector<APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE address>& addresses)
+{
+    for (size_t i = 0; i < data.size(); i += 7)
     {
-        std::string address;
-        int ssid;
-        parse_address(data.substr(i, 7), address, ssid);
-        addresses.push_back(std::make_pair(address, ssid));
+        APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE address address;
+        parse_address(data.substr(i, 7), address);
+        addresses.push_back(address);
     }
 }
 

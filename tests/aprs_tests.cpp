@@ -5,7 +5,7 @@
 // Copyright (c) 2023 Ion Todirel                                   //
 // **************************************************************** //
 //
-// aprs.hpp
+// aprs_tests.cpp
 // 
 // MIT License
 // 
@@ -100,9 +100,21 @@ TEST(kiss, kiss_frame_decoder)
     EXPECT_TRUE(decoder.count() == 2);
     EXPECT_TRUE(decoder.data()[1] == "foo bar");
 
-    // escape sequences 
-    // use decode.clear
+    // parse incomplete chunks while clearing processed data
+    decoder.reset();
+    EXPECT_TRUE(decoder.decode(std::string_view("\xC0""\0foo", 5)) == false);
+    EXPECT_TRUE(decoder.count() == 0);
+    EXPECT_TRUE(decoder.decode(std::string_view("\xC0\xC0""\0bar", 6)) == false);
+    EXPECT_TRUE(decoder.count() == 1);
+    EXPECT_TRUE(decoder.data()[0] == "foo");
     decoder.clear();
+    EXPECT_TRUE(decoder.decode("\xC0") == true);
+    EXPECT_TRUE(decoder.count() == 1);
+    EXPECT_TRUE(decoder.data()[0] == "bar");
+
+    // escape sequences 
+    // use decode.reset
+    decoder.reset();
     // we want a frame end marker in between "foo" and "bar"
     EXPECT_TRUE(decoder.decode(std::string_view("\xC0""\0foo""\xDB""\xDC""bar""\xC0", 11)) == true);
     EXPECT_TRUE(decoder.count() == 1);
