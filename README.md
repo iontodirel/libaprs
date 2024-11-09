@@ -91,6 +91,37 @@ EXPECT_TRUE(address.kind == aprs::core::address_kind::other);
 EXPECT_TRUE(aprs::core::to_string(address) == "K1NOT*");
 ```
 
+### Selective packet decoding:
+
+``` cpp
+aprs::data_type type = aprs::get_data_type(packet);
+if (type == aprs::data_type::position)
+{
+    aprs::position position;
+    aprs::try_decode_packet_as(packet, position);
+}
+else if (type == aprs::data_type::mic_e)
+{
+    aprs::mic_e mic_e;
+    aprs::try_decode_packet_as(packet, mic_e);
+}
+else if (type == aprs::data_type::object)
+{
+    aprs::object object;
+    aprs::try_decode_packet_as(packet, object);
+}
+else if (type == aprs::data_type::item)
+{
+    aprs::item item;
+    aprs::try_decode_packet_as(packet, item);
+}
+else if (type == aprs::data_type::message)
+{
+    aprs::message message;
+    aprs::try_decode_packet_as(packet, message);
+}
+```
+
 ## Testing
 
 The ***tests*** directory contain the tests. `tests/aprs_tests.cpp` contains a comprehensive sets of tests, written using the Google Test framework.
