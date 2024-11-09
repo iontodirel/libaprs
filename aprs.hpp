@@ -2936,6 +2936,8 @@ APRS_LIB_INLINE bool try_parse_mic_e(std::string_view destination_address, std::
     mic_e.symbol_code = symbol_code[0];
     mic_e.symbol_table = symbol_table[0];
 
+    mic_e.text = telemetry_or_text;
+
     return true;
 }
 
@@ -4876,6 +4878,9 @@ APRS_LIB_INLINE bool try_decode_ui_frame(std::string_view data, frame& frame, de
     APRS_LIB_AX25_DETAIL_NAMESPACE_REFERENCE parse_address(source_address, frame.source_address);
     APRS_LIB_AX25_DETAIL_NAMESPACE_REFERENCE parse_addresses(digipeater_addresses, frame.digipeater_addresses);
 
+    frame.destination_address.mark = false;
+    frame.source_address.mark = false;
+
     frame.info_field = info_field;
 
     return true;
@@ -4897,17 +4902,17 @@ APRS_LIB_INLINE void parse_address(std::string_view data, std::string& address, 
     address = APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE trim(address);
 }
 
-APRS_LIB_INLINE void parse_address(std::string_view data, APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE address& address_)
+APRS_LIB_INLINE void parse_address(std::string_view data, struct APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE address& address)
 {
-    std::string address;
+    std::string text;
     int ssid = 0;
     bool mark = false;
 
-    parse_address(data, address, ssid, mark);
+    parse_address(data, text, ssid, mark);
 
-    address_.text = address;
-    address_.ssid = ssid;
-    address_.mark = mark;
+    address.text = text;
+    address.ssid = ssid;
+    address.mark = mark;
 }
 
 APRS_LIB_INLINE void parse_addresses(std::string_view data, std::vector<APRS_LIB_APRS_CORE_NAMESPACE_REFERENCE address>& addresses)
