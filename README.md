@@ -69,6 +69,28 @@ EXPECT_TRUE(symbol_info.name == "digi_green");
 EXPECT_TRUE(symbol_info.description == "Digipeater (green star)");
 ```
 
+### Packet decomposition:
+
+``` cpp
+EXPECT_TRUE(packet.from == "JUPITR");
+EXPECT_TRUE(packet.to == "APN382");
+EXPECT_TRUE(packet.path.size() == 1);
+EXPECT_TRUE(packet.path[0] == "K1NOT*");
+EXPECT_TRUE(packet.data == "!4741.70NB12258.05W# MT. JUPITER   K7IDX");
+EXPECT_TRUE(aprs::to_string(packet) == "JUPITR>APN382,K1NOT*:!4741.70NB12258.05W# MT. JUPITER   K7IDX");
+```
+
+### Address parsing:
+
+``` cpp
+aprs::core::address address = packet.path[0]; // K1NOT*
+EXPECT_TRUE(address.text == "K1NOT");
+EXPECT_TRUE(address.mark == true);
+EXPECT_TRUE(address.length == 6);
+EXPECT_TRUE(address.kind == aprs::core::address_kind::other);
+EXPECT_TRUE(aprs::core::to_string(address) == "K1NOT*");
+```
+
 ## Testing
 
 The ***tests*** directory contain the tests. `tests/aprs_tests.cpp` contains a comprehensive sets of tests, written using the Google Test framework.
