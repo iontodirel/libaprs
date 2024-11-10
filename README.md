@@ -122,6 +122,23 @@ else if (type == aprs::data_type::message)
 }
 ```
 
+### Rendering APRS symbols:
+
+The APRS symbol information within the API contains icon row and column lookup. It's designed to work with icons from: https://github.com/hessu/aprs-symbols/blob/master/png/aprs-symbols-24-1.png
+
+Copyright for the graphics is attributed to heesu and others, as documented here: https://github.com/hessu/aprs-symbols/blob/master/COPYRIGHT.md
+
+``` cpp
+aprs::symbol_info symbol_info = aprs::get_symbol_info(symbol);
+EXPECT_TRUE(symbol_info.name == "digi_green");
+EXPECT_TRUE(symbol_info.description == "Digipeater (green star)");
+EXPECT_TRUE(symbol_info.image == "aprs-symbols-24-1.png");
+EXPECT_TRUE(symbol_info.row == 1);
+EXPECT_TRUE(symbol_info.column == 3);
+```
+
+The symbol lookup represents an icon on row 1 and column 3, using the aprs-symbols-24-1.png render.
+
 ## Testing
 
 The ***tests*** directory contain the tests. `tests/aprs_tests.cpp` contains a comprehensive sets of tests, written using the Google Test framework.

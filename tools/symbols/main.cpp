@@ -441,6 +441,9 @@ int main()
 "    bool overlayable = false;\n"
 "    std::string destination_address;\n"
 "    int ssid = -1;\n"
+"    std::string image;\n"
+"    int row = -1;\n"
+"    int column = -1;\n"
 "};\n");
     cpp.append("\n");
 
@@ -469,6 +472,12 @@ int main()
         cpp.append("\"" + symbol.destination_address + "\"");
         cpp.append(", ");
         cpp.append(std::to_string(symbol.ssid));
+        cpp.append(", ");
+        cpp.append("\"" + symbol.image + "\"");
+        cpp.append(", ");
+        cpp.append(std::to_string(symbol.row));
+        cpp.append(", ");
+        cpp.append(std::to_string(symbol.column));
         cpp.append(" });\n");
     }
 
