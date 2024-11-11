@@ -153,6 +153,25 @@ Install the CMake and C++ extensions in VSCode, or the Native Desktop workload i
 
 On Linux systems, install the dependencies listed in `install_dependencies.sh`, which include a compiler, the CMake build system, and a native build system like make. Example for Debian systems: `apt-get install -y gcc g++ gcc-13 g++-13 clang make cmake ninja-build`.
 
+### Symbol generation
+
+The `tools/symbols` directory contains a utility `json_to_cpp` used to generate code for symbol parsing. The input to the program is the `symbols\symbols.csv` file. The `symbols.csv` file is manually generated from the symbols.xslx file, while the two files are kept in sync. Typical workflow is to use Excel or other office application to update the xslx file, then export the xslx file to csv, and then to use the json_to_cpp utility to generate the .json, .cpp and other generated code found in the symbols directory. The symbols.json file is useful as a general entry point for generating other files or code.
+
+#### Workflow Overview
+
+1. **Input File**: The primary input to the `json_to_cpp` program is the `symbols/symbols.csv` file.
+
+2. **Updating Symbols**:
+   - The `symbols.csv` file is manually generated from an Excel file (`symbols.xlsx`).
+   - To keep these files in sync:
+     - Use Excel or another office application to update `symbols.xlsx`.
+     - Export the updated `.xlsx` file as `symbols.csv`.
+
+3. **Running `json_to_cpp`**:
+   - After updating `symbols.csv`, run the `json_to_cpp` utility to generate:
+     - `symbols.json`: A general entry point for generating additional files or code.
+     - `.cpp` and other generated files in the `symbols` directory.
+
 ## Integration with CMake
 
 As this is a header only library, you can simple download the header and use it:
@@ -169,4 +188,4 @@ Include the header in your source file:
 
 MIT License, Copyright (C) 2023 Ion Todirel
 
-Tests use data obtained from APRS-IS. I do not hold any copyright or license claim over this data, the data is in the public domain.
+Tests and examples use data obtained from APRS-IS. I do not hold any copyright or license claim over this data, the data is in the public domain.
