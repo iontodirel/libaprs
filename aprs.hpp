@@ -359,6 +359,8 @@ struct mic_e
     mic_e_status status = mic_e_status::uknown;
     std::vector<int> telemetry_channels;
     std::string text;
+    int speed = -1;
+    int course = -1;
 };
 
 struct bulletin
@@ -397,7 +399,7 @@ enum class data_extension_type
     area_object_descriptor
 };
 
-enum class symbol : int
+enum class symbol : size_t
 {
     police_station,
     digi,
@@ -652,7 +654,9 @@ enum class decoder_hint
     do_not_parse_telemetry,
     parse_mic_e_altitude,
     handle_misformatted_packet,
-    alternate_parse_position_packet
+    alternate_parse_position_packet,
+    th_d7,
+    tm_d700
 };
 
 enum class area_object_type : unsigned int
@@ -1025,6 +1029,8 @@ APRS_LIB_INLINE bool try_parse_coordinate(std::string_view degrees_str, std::str
 APRS_LIB_INLINE bool try_parse_mic_e_lat(std::string_view dest_str, float& lat);
 APRS_LIB_INLINE bool try_parse_mic_e_lon(std::string_view dest_str, std::string_view lon_str, float& lon);
 APRS_LIB_INLINE bool try_parse_mic_e_altitude(std::string_view alt_str, float& alt);
+APRS_LIB_INLINE bool try_parse_mic_e_speed(std::string_view speed_course_str, int& speed);
+APRS_LIB_INLINE bool try_parse_mic_e_course(std::string_view speed_course_str, int& course);
 
 #endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
@@ -1154,6 +1160,8 @@ APRS_LIB_INLINE bool try_get_position_without_timestamp_is_compressed(std::strin
 APRS_LIB_INLINE bool try_get_object_is_compressed(std::string_view data, bool& compressed);
 APRS_LIB_INLINE bool try_get_item_is_compressed(std::string_view data, bool& compressed);
 APRS_LIB_INLINE bool try_get_mic_e_is_kenwood_tmd700(std::string_view data, bool& result);
+APRS_LIB_INLINE bool try_get_mic_e_maybe_kenwood_d7(std::string_view data, bool& result);
+APRS_LIB_INLINE bool try_get_mic_e_maybe_kenwood_tmd700(std::string_view data, bool& result);
 APRS_LIB_INLINE bool is_supported_pri_table_symbol(char symbol_code);
 APRS_LIB_INLINE bool is_supported_alt_table_symbol(char symbol_code);
 APRS_LIB_INLINE bool is_overlayable_symbol(char symbol_code);
@@ -2204,6 +2212,61 @@ APRS_LIB_INLINE bool try_parse_mic_e_altitude(std::string_view alt_str, float& a
     return true;
 }
 
+APRS_LIB_INLINE bool try_parse_mic_e_speed(std::string_view speed_course_str, int& speed)
+{
+    // Format encoding:
+    //
+    //     xyz, where xy is the speed in knots
+    //
+    // Example:
+    //
+    //     n"O = 20 knots
+    //
+    //     n - has ASCII value 110, 110 - 28 = 82 (SP+28)
+    //     " - has ASCII value 34, 34 - 28 = 6 (DC+28)
+    //     O - unused for speed calculation (SE+28)
+    //     (82 * 10) + (6 / 10) = 820
+    //     as 820 >= 800, substract 800, 820 - 800 = 20 knots
+
+    int s2 = speed_course_str[0] - 28;
+    int s1 = speed_course_str[1] - 28;
+
+    speed = s2 * 10;
+    speed = speed + s1 / 10;
+
+    if (speed >= 800)
+    {
+        speed = speed - 800;
+    }
+
+    return true;
+}
+
+APRS_LIB_INLINE bool try_parse_mic_e_course(std::string_view speed_course_str, int& course)
+{
+    // Format encoding:
+    //
+    //     xyz, where yz is the course in degrees
+    //
+    // Example:
+    //
+    //     n"0 = 251 degrees
+    //
+    //     n - unused for course calculation (SP+28)
+    //     " - has ASCII value 34, 34 - 28 = 6 (DC+28)
+    //     O - has ASCII value 79, 79 - 28 = 51 (SE+28)
+    //     ((6 % 10) - 4) * 100 + 51 = 251 degrees
+
+    int c2 = speed_course_str[1] - 28;
+    int c1 = speed_course_str[2] - 28;
+
+    course = ((c2 % 10) - 4);
+    course = course * 100;
+    course = course + c1;
+
+    return true;
+}
+
 #endif // APRS_LIB_PUBLIC_FORWARD_DECLARATIONS_ONLY
 
 APRS_LIB_APRS_NAMESPACE_END
@@ -2917,7 +2980,9 @@ APRS_LIB_INLINE bool try_parse_mic_e(std::string_view destination_address, std::
 
     if (!APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE try_parse_mic_e_lat(destination_address, mic_e.lat) ||
         !APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE try_parse_mic_e_lon(destination_address, lon, mic_e.lon) ||
-        !APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE try_parse_mic_e_status(destination_address, mic_e.status))
+        !APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE try_parse_mic_e_status(destination_address, mic_e.status) ||
+        !APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE try_parse_mic_e_speed(speed_and_course, mic_e.speed) ||
+        !APRS_LIB_APRS_DETAIL_NAMESPACE_REFERENCE try_parse_mic_e_course(speed_and_course, mic_e.course))
     {
         return false;
     }
@@ -3255,10 +3320,14 @@ APRS_LIB_INLINE bool try_parse_mic_e_message_abc(char ch, int& d, bool& custom)
         d = 1;
         custom = true;
     }
-    else
+    else if ((ch >= '0' && ch <= '9') || ch == 'L')
     {
         d = 0;
         custom = false;
+    }
+    else
+    {
+        return false;
     }
     return true;
 }
@@ -3279,7 +3348,11 @@ APRS_LIB_INLINE bool try_parse_mic_e_status(std::string_view destination_address
         return false;
     }
 
-    if (a_custom != b_custom || b_custom != c_custom || c_custom != a_custom)
+    // If the A/B/C message identifier bits contain a mixture of Standard 1s
+    // and Custom 1s, the message type is “unknown”.
+    if ((a == 1 && b == 1 && a_custom != b_custom) ||
+        (b == 1 && c == 1 && b_custom != c_custom) ||
+        (c == 1 && a == 1 && c_custom != a_custom))
     {
         return false;
     }
@@ -3288,16 +3361,16 @@ APRS_LIB_INLINE bool try_parse_mic_e_status(std::string_view destination_address
 
         Lookup table:
 
-        |  a  |  b  |  c  | (a << 2) | (b << 1) |  c  | Result |  Status
-        |-----|-----|-----|----------|----------|-----|--------|--------------
-        |  0  |  0  |  0  |    0     |    0     |  0  |   0    |  emergency  
-        |  0  |  0  |  1  |    0     |    0     |  1  |   1    |  priority
-        |  0  |  1  |  0  |    0     |    2     |  0  |   2    |  special
-        |  0  |  1  |  1  |    0     |    2     |  1  |   3    |  committed
-        |  1  |  0  |  0  |    4     |    0     |  0  |   4    |  returning
-        |  1  |  0  |  1  |    4     |    0     |  1  |   5    |  in service
-        |  1  |  1  |  0  |    4     |    2     |  0  |   6    |  en route
-        |  1  |  1  |  1  |    4     |    2     |  1  |   7    |  off duty
+        |  a  |  b  |  c  | (a << 2) | (b << 1) |  c  | Result |  Standard   |  Custom
+        |-----|-----|-----|----------|----------|-----|--------|-------------|-------------
+        |  0  |  0  |  0  |    0     |    0     |  0  |   0    |  emergency  |  emergency
+        |  0  |  0  |  1  |    0     |    0     |  1  |   1    |  priority   |  custom6
+        |  0  |  1  |  0  |    0     |    2     |  0  |   2    |  special    |  custom5
+        |  0  |  1  |  1  |    0     |    2     |  1  |   3    |  committed  |  custom4
+        |  1  |  0  |  0  |    4     |    0     |  0  |   4    |  returning  |  custom3
+        |  1  |  0  |  1  |    4     |    0     |  1  |   5    |  in service |  custom2
+        |  1  |  1  |  0  |    4     |    2     |  0  |   6    |  en route   |  custom1
+        |  1  |  1  |  1  |    4     |    2     |  1  |   7    |  off duty   |  custom0
 
     */
 
@@ -3576,8 +3649,8 @@ APRS_LIB_INLINE bool symbol_map::try_get_symbol_by_name(const std::string& name,
 #ifdef APRS_LIB_SYMBOL_INFO
 
 APRS_LIB_INLINE symbol_info& symbol_map::get_symbol_info(symbol symbol)
-{ 
-    size_t index = (size_t)symbol;
+{
+    size_t index = static_cast<size_t>(symbol);
     if (index >= symbols.size())
     {
         return no_symbol;
@@ -4317,7 +4390,32 @@ APRS_LIB_INLINE bool try_get_mic_e_is_kenwood_tmd700(std::string_view data, bool
     // characters of the Information field; if they are ' and ] respectively, then the
     // packet is almost certainly from a TM-D700.
 
+    if (data[0] == '\'' && data[9] == ']')
+    {
+        return true;
+    }
+
     return true;
+}
+
+APRS_LIB_INLINE bool try_get_mic_e_maybe_kenwood_tmd700(std::string_view data, bool& result)
+{
+    if (data[9] == ']')
+    {
+        return true;
+    }
+
+    return false;
+}
+
+APRS_LIB_INLINE bool try_get_mic_e_maybe_kenwood_d7(std::string_view data, bool& result)
+{
+    if (data[9] == '>')
+    {
+        return true;
+    }
+
+    return false;
 }
 
 // **************************************************************** //
