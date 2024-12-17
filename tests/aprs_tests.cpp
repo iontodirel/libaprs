@@ -577,6 +577,28 @@ TEST(aprs_detail, try_parse_mic_e_altitude)
    EXPECT_TRUE(alt == 10061);
 }
 
+TEST(aprs, try_parse_mic_e_status)
+{
+    aprs::mic_e_status status;
+    EXPECT_TRUE(aprs::detail::try_parse_mic_e_status("S32", status));
+    EXPECT_TRUE(status == aprs::mic_e_status::returning);
+
+    EXPECT_TRUE(aprs::detail::try_parse_mic_e_status("F2D", status));
+    EXPECT_TRUE(status == aprs::mic_e_status::custom2);
+
+    EXPECT_TRUE(aprs::detail::try_parse_mic_e_status("234", status));
+    EXPECT_TRUE(status == aprs::mic_e_status::emergency);
+
+    EXPECT_TRUE(aprs::detail::try_parse_mic_e_status("T7S", status));
+    EXPECT_TRUE(status == aprs::mic_e_status::in_service);
+
+    EXPECT_TRUE(aprs::detail::try_parse_mic_e_status("VP1", status));
+    EXPECT_TRUE(status == aprs::mic_e_status::en_route);
+
+    EXPECT_TRUE(aprs::detail::try_parse_mic_e_status("TWS", status));
+    EXPECT_TRUE(status == aprs::mic_e_status::off_duty);
+}
+
 TEST(aprs, try_decode_packet_as_mic_e_status)
 {  
     aprs::packet packet;
